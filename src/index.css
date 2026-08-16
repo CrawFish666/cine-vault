@@ -2,7 +2,6 @@
 @import "tailwindcss";
 
 @theme {
-
 	/* Шрифт */
 	--font-manrope: "Manrope", sans-serif;
 
@@ -45,4 +44,12 @@
 	html {
 		font-family: var(--font-manrope);
 	}
+}
+
+#root {
+	@apply flex min-h-screen flex-col;
+}
+
+body {
+	@apply bg-surface-08
 }
