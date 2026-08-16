@@ -2,7 +2,43 @@
 @import "tailwindcss";
 
 @theme {
+
+	/* Шрифт */
 	--font-manrope: "Manrope", sans-serif;
+
+	/* Absolute */
+	--color-white: #ffffff;
+	--color-black: #000000;
+
+	/* Primary (red) — 45 темнее, 99 светлее */
+	--color-primary-45: #e50000;
+	--color-primary-50: #ff0000;
+	--color-primary-55: #ff1919;
+	--color-primary-60: #ff3333;
+	--color-primary-80: #ff9999;
+	--color-primary-90: #ffcccc;
+	--color-primary-95: #ffe5e5;
+	--color-primary-99: #fffafa;
+
+	/* Surface — тёмные фоны, 06 темнее, 30 светлее */
+	--color-surface-06: #0f0f0f;
+	--color-surface-08: #141414;
+	--color-surface-10: #1a1a1a;
+	--color-surface-12: #1f1f1f;
+	--color-surface-15: #262626;
+	--color-surface-20: #333333;
+	--color-surface-25: #404040;
+	--color-surface-30: #4c4c4c;
+
+	/* Neutral — текст и второстепенные элементы, 60 темнее, 99 светлее */
+	--color-neutral-60: #999999;
+	--color-neutral-65: #a6a6a6;
+	--color-neutral-70: #b3b3b3;
+	--color-neutral-75: #bfbfbf;
+	--color-neutral-90: #e4e4e7;
+	--color-neutral-95: #f1f1f3;
+	--color-neutral-97: #f7f7f8;
+	--color-neutral-99: #fcfcfd;
 }
 
 @layer base {
