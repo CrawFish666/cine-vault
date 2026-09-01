@@ -6,10 +6,18 @@ import { ROUTES } from "../../routes/pathConstants";
 import { DesktopNav } from "./DesktopNav";
 import { HeaderActions } from "./HeaderActions";
 import { MobileMenu } from "./MobileMenu";
+import { SearchPanel } from "./SearchPanel";
 
 export function Header() {
 
 	const [menuIsOpen, setMenuIsOpen] = useState(false);
+	const [searchIsOpen, setSearchIsOpen] = useState(false);
+	const toggleSearch = () => {
+		setSearchIsOpen((prev) => !prev);
+	};
+	const closeSearch = () => {
+		setSearchIsOpen(false);
+	};
 
 
 	useEffect(() => {
@@ -29,7 +37,7 @@ export function Header() {
 
 	return (
 		<header className="relative ">
-			<div className="w-full max-w-[1600px] mx-auto px-4 text-white flex items-center justify-between py-4">
+			<div className="w-full laptop:max-w-[1280px] desktop:max-w-[1600px] mx-auto px-4 laptop:px-0 text-white flex items-center justify-between py-4">
 
 				<div className="inline-flex items-center gap-0.5">
 					<Logo className="w-[35px] h-[35px] text-primary-45" />
@@ -39,7 +47,7 @@ export function Header() {
 				{/* Nav на desktop */}
 				<DesktopNav />
 				{/* Кнопки на desktop */}
-				<HeaderActions />
+				<HeaderActions onSearchToggle={toggleSearch} isSearchOpen={searchIsOpen} />
 
 
 				{/* Кнопка burger-menu на мобилке */}
@@ -53,7 +61,9 @@ export function Header() {
 			</div>
 
 			{/* Выпадающий список при открытом burder-menu */}
-			{menuIsOpen && <MobileMenu onClose={() => setMenuIsOpen(false)}/>}
+			{menuIsOpen && <MobileMenu onClose={() => setMenuIsOpen(false)} />}
+
+			{searchIsOpen && <SearchPanel />}
 		</header>
 	);
 }
