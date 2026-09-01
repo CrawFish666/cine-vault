@@ -2,6 +2,8 @@
 @import "tailwindcss";
 
 @theme {
+	--breakpoint-laptop: 90rem;
+	--breakpoint-desktop: 120rem;
 	/* Шрифт */
 	--font-manrope: "Manrope", sans-serif;
 
