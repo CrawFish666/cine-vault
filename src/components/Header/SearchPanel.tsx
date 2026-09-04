@@ -1,5 +1,5 @@
 import { Search, X } from "lucide-react";
-import { useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useSearchMulti } from "../../hooks/Search/useSearchMulti";
@@ -8,7 +8,12 @@ import { SearchResults } from "./SearchResults";
 
 type SearchTab = "movie" | "tv" | "person";
 
-export function SearchPanel() {
+interface SearchPanelProps {
+	onClose: () => void;
+	variant?: "dropdown" | "inline";
+}
+
+export function SearchPanel({ onClose, variant = "dropdown" }: SearchPanelProps) {
 
 	const navigate = useNavigate();
 
@@ -16,14 +21,6 @@ export function SearchPanel() {
 	const { data, isLoading, isError } = useSearchMulti(query);
 
 	const results = data?.pages[0]?.results ?? [];
-
-	const goToSearchPage = (initialTab: SearchTab) => {
-		navigate(`/search?q=${encodeURIComponent(query)}`, {
-			state: {
-				initialTab,
-			},
-		});
-	};
 
 	const navigateToSearch = (
 		searchQuery: string,
@@ -34,6 +31,7 @@ export function SearchPanel() {
 				initialTab,
 			},
 		});
+		onClose();
 	};
 
 	const handleKeyDown = (
@@ -48,9 +46,38 @@ export function SearchPanel() {
 		navigateToSearch(query, firstResult.media_type);
 	};
 
+	const searchPanelRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (variant !== "dropdown") return;
+
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				searchPanelRef.current &&
+				!searchPanelRef.current.contains(event.target as Node)
+			) {
+				setQuery("");
+			}
+		};
+
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, [variant]);
+	
+
+	const wrapperClasses =
+		variant === "dropdown"
+			? "border-t border-surface-15 bg-surface-12 absolute inset-x-0"
+			: "";
+
+	const innerClasses =
+		variant === "dropdown"
+			? "w-full flex flex-col gap-5 py-6 max-w-[1600px] mx-auto px-4 min-[1280px]:px-[clamp(16px,calc(15vw_-_176px),40px)] laptop:px-10 2xl:px-[clamp(0px,calc(-10.417vw_+_200px),40px)]"
+			: "w-full flex flex-col gap-5";
+
 	return (
-		<div className="border-t border-surface-15 bg-surface-10">
-			<div className="w-full max-w-[1600px] mx-auto px-4 py-6">
+		<div className={wrapperClasses} ref={searchPanelRef}>
+			<div className={innerClasses}>
 				<div className="flex items-center gap-4">
 					<Search className="w-6 h-6 text-gray-400" />
 
@@ -63,25 +90,24 @@ export function SearchPanel() {
 						onKeyDown={handleKeyDown}
 					/>
 
-					<button
-						type="button"
 
-						className="p-2"
-					>
-
-						<X className="w-6 h-6 text-gray-400" />
-					</button>
 				</div>
 
-				{isLoading && <div>Loading...</div>}
+				{isLoading && <div className=" text-white">Loading...</div>}
 
-				{isError && <div>Something went wrong</div>}
+				{isError && <div className=" text-white">Something went wrong</div>}
 
-				{data && (
+				{data && results.length > 0 && (
 					<SearchResults
 						results={results}
 						onResultClick={navigateToSearch}
 					/>
+				)}
+
+				{data && results.length === 0 && (
+					<div className=" text-white">
+						Ничего не найдено
+					</div>
 				)}
 
 			</div>

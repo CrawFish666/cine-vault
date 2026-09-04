@@ -37,7 +37,7 @@ export function SearchResults({ results, onResultClick }: SearchResultsProps) {
 	).slice(0, 6);
 
 	return (
-		<div className="text-white flex flex-col gap-5 py-5">
+		<div className="text-white flex flex-col   divide-y border-t border-b border-white">
 			{firstMovie && (
 				<div
 					className="flex gap-2 items-center cursor-pointer"
