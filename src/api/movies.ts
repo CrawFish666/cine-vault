@@ -1,4 +1,8 @@
-import type { Movie, Paginated, DatedMovieResponse, GenresListResponse, TrendingNowMovie, MovieRuntime } from "../types/tmdb";
+import { type Movie, 
+	type Paginated, 
+	type DatedMovieResponse, 
+	type GenresListResponse, type TrendingNowMovie, type MovieRuntime, type MovieDetails, 
+	type MediaReview} from "../types/tmdb";
 import { tmdbClient } from "./client";
 
 export interface MovieListParams {
@@ -23,6 +27,18 @@ export interface TrendingNowParams extends MovieListParams {
 function getMustWatchDateFrom(yearsBack: number): string {
 	const year = new Date().getFullYear() - yearsBack;
 	return `${year}-01-01`;
+}
+
+export interface MovieDetailsParams {
+	id: number;
+	language?: string;
+	append_to_response?: string;
+}
+
+export interface MovieReviewsParams {
+	id: number;
+	language?: string;
+	page?: number;
 }
 
 // MovieListParams = {} сделан для того, чтобы можно было вообще ничего не передавать в функцию при вызове.
@@ -66,4 +82,15 @@ export const moviesApi = {
 		tmdbClient
 			.get<Paginated<TrendingNowMovie>>(`/trending/movie/${time_window}`, { params: { language, page } })
 			.then(res => res.data),
+	details: ({ id, language = "ru-RU", append_to_response }: MovieDetailsParams) =>
+		tmdbClient
+			.get<MovieDetails>(`movie/${id}`, {
+				params: {
+					language,
+					append_to_response
+				}
+			})
+			.then(res => res.data),
+
+			
 }
