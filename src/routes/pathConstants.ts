@@ -5,7 +5,7 @@ export const ROUTES = {
 	MOVIE_DETAILS_BY_ID: (id: number | string) => `/movies/${id}`,
 	TV_SHOWS: "/tv_shows",
 	TV_SHOWS_DETAILS: "/tv_shows/:id",
-	TV_SHOWS_DETAILS_BY_ID: (id: number | string) => `/tv/${id}`,
+	TV_SHOWS_DETAILS_BY_ID: (id: number | string) => `/tv_shows/${id}`,
 	PEOPLE: "/people",
 	WATCHLIST: "/watchlist",
 	SEARCH: "/search",
