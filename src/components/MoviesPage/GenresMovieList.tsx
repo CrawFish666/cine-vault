@@ -44,7 +44,7 @@ export function GenresMovieList() {
 
 
 	return (
-		<section>
+		<section id="genres-movies">
 			<CarouselHeader title="По жанрам" showControls
 				emblaDotsRef={emblaDotsRef}
 				prevButtonDisabled={prevButtonDisabled}
