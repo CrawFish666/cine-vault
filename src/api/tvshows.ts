@@ -1,4 +1,4 @@
-import { type TVShow, type Paginated, type TrendingNowTVShows, type GenresListResponse, type TVShowDetails } from "../types/tmdb";
+import { type TVShow, type Paginated, type TrendingNowTVShows, type GenresListResponse, type TVShowDetails, type TVShowSeasonDetails } from "../types/tmdb";
 import { getUserTimezone } from "../utils/timezone";
 import { tmdbClient } from "./client";
 
@@ -34,6 +34,12 @@ export interface DetailsParams extends LanguageParam {
 	append_to_response?: string;
 }
 
+export interface TVSeasonDetailsParams {
+	seriesId: number;
+	seasonNumber: number;
+	language?: string;
+	append_to_response?: string;
+}
 
 export const tvshowsApi = {
 	trendingNow: ({ language = "ru-RU", time_window = "day", page = 1 }: TrendingNowTVShowsParams = {}) =>
@@ -83,10 +89,18 @@ export const tvshowsApi = {
 				page
 			}
 		}).then(res => res.data),
-	details: (id: number, {language = "ru-RU", append_to_response}: DetailsParams = {}) => tmdbClient.get<TVShowDetails>(`/tv/${id}`, {
-		params: {
-			language,
-			append_to_response
-		}
-	}).then(res => res.data)
+	details: (id: number, { language = "ru-RU", append_to_response }: DetailsParams = {}) =>
+		tmdbClient.get<TVShowDetails>(`/tv/${id}`, {
+			params: {
+				language,
+				append_to_response
+			}
+		}).then(res => res.data),
+	seasonDetails: ({ seriesId, seasonNumber, language = "ru-RU", append_to_response }: TVSeasonDetailsParams) =>
+		tmdbClient.get<TVShowSeasonDetails>(`/tv/${seriesId}/season/${seasonNumber}`, {
+			params: {
+				language,
+				append_to_response
+			}
+		}).then(res => res.data),
 }
