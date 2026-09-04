@@ -12,6 +12,7 @@ import { useInfiniteScrollTrigger } from "../../hooks/useInfiniteScrollTrigger";
 import { useVisibleSlides } from "../../hooks/useVisibleSlides";
 import { useMovieRuntimes } from "../../hooks/useMovieRuntimes";
 import { WatchlistButton } from "../WatchlistButton";
+import { ROUTES } from "../../routes/pathConstants";
 
 
 
@@ -79,11 +80,10 @@ export function MustWatchMovies() {
 					console.log(item)
 					return (
 						<CarouselSlide key={item.id} className="basis-[231px] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] lg:basis-[calc((100%-40px)/3)] xl:basis-[calc((100%-60px)/4)]">
-							<CarouselCard className="flex flex-col p-2.5 lg:p-4 2xl:p-5 h-[clamp(303px,calc(9.62vw+263.5px),404px)] laptop:h-[clamp(404px,calc(20vw+114px),500px)]">
+							<CarouselCard to={ROUTES.MOVIE_DETAILS_BY_ID(item.id)} className="relative flex flex-col p-2.5 lg:p-4 2xl:p-5 h-[clamp(303px,calc(9.62vw+263.5px),404px)] laptop:h-[clamp(404px,calc(20vw+114px),500px)]">
 
 								<div className="relative min-h-0 flex-1 overflow-hidden mb-3 lg:mb-4 2xl:mb-5">
-									<WatchlistButton className="absolute right-3 top-3"
-										item={{ id: item.id, mediaType: "movie", posterPath: item.poster_path, title: item.title, voteAverage: item.vote_average }} />
+
 									<img className="object-cover rounded-[10px] w-full h-full" src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} />
 								</div>
 
@@ -102,6 +102,8 @@ export function MustWatchMovies() {
 
 								</div>
 							</CarouselCard>
+							<WatchlistButton className="absolute right-3 top-3"
+								item={{ id: item.id, mediaType: "movie", posterPath: item.poster_path, title: item.title, voteAverage: item.vote_average }} />
 						</CarouselSlide>
 					)
 				})}
