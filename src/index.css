@@ -55,3 +55,6 @@
 body {
 	@apply bg-surface-08
 }
+section[id] {
+	scroll-margin-top: 100px; /* примерно высота шапки */
+}
