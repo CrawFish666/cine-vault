@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import type { EmblaCarouselType } from "embla-carousel";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../routes/pathConstants";
+import { WatchlistButton } from "../WatchlistButton";
+import { IMDbButton } from "../details/hero/IMDbButton";
 
 
 export function NowPlayingCarousel() {
-	const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, watchDrag: false })
+	const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, watchDrag: true })
 	const [prevButtonDisabled, setPrevButtonDisabled] = useState(true)
 	const [nextButtonDisabled, setNextButtonDisabled] = useState(true)
 	const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
@@ -77,23 +79,25 @@ export function NowPlayingCarousel() {
 							{/**Градиент-затемнение */}
 							<div className="absolute inset-0 bg-gradient-to-t from-surface-08  to-transparent" />
 
-							<div className="absolute max-w-3xl w-full bottom-5 md:bottom-20 lg:bottom-31 left-1/2 -translate-x-1/2 text-center flex flex-col items-center">
+							<div className="absolute max-w-3xl w-full bottom-2 min-[440px]:bottom-5 md:bottom-20 lg:bottom-31 left-1/2 -translate-x-1/2 text-center flex flex-col items-center">
 								<h2 className="font-bold text-[clamp(24px,1.21vw+19.3px,38px)] text-white center">{item.title}</h2>
-								<div className="flex items-center gap-3 text-sm text-neutral-75 mb-5 md:mb-0">
+								<div className="flex items-center gap-3 text-sm text-neutral-75 mb-2 sm:mb-5">
 									<span className="font-medium text-yellow-400">★ {item.vote_average.toFixed(1)}</span>
 									<span>•</span>
 									<span>{item.release_date}</span>
 								</div>
-								<p className="font-medium text-neutral-60 text-lg leading-normal text-center mb-[30px] hidden md:block">{item.overview}</p>
-								<div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-5">
-									<Link to={ROUTES.MOVIE_DETAILS_BY_ID(item.id)} className="text-white text-lg font-semibold px-6 py-[14px] bg-primary-45 rounded-lg">
+								<p className="font-medium text-neutral-60 text-base lg:text-lg leading-normal text-center mb-[30px] hidden min-[845px]:block">{item.overview}</p>
+								<div className="flex flex-row sm:flex-row items-stretch gap-2 sm:gap-5">
+									<Link to={ROUTES.MOVIE_DETAILS_BY_ID(item.id)} className="text-white text-lg flex font-semibold px-3 py-1 sm:px-6 sm:py-3.5 items-center bg-primary-45 rounded-lg">
 										Подробнее
 									</Link>
-									<div>
-										<button className="border border-surface-15 bg-surface-06 p-[13px] rounded-lg">
-											<Bookmark className="w-7 h-7  text-white" />
-										</button>
-									</div>
+									<WatchlistButton
+										classNameIcon="w-6 h-6 sm:w-7 sm:h-7"
+										variant="default"
+										className="border border-surface-15 bg-surface-06 p-2 sm:p-[13px] rounded-lg"
+										item={{ id: item.id, mediaType: "movie", posterPath: item.poster_path, title: item.title, voteAverage: item.vote_average }} />
+
+
 								</div>
 							</div>
 						</div>
