@@ -1,4 +1,4 @@
-export function uniqueById<T extends { id: number }>(items: T[]): T[] {
+export function uniqueById<T extends { id: string | number }>(items: T[]): T[] {
 	return Array.from(
 		items.reduce((map, item) => {
 			if (!map.has(item.id)) {
@@ -6,6 +6,6 @@ export function uniqueById<T extends { id: number }>(items: T[]): T[] {
 			}
 
 			return map;
-		}, new Map<number, T>()).values()
+		}, new Map<T["id"], T>()).values()
 	);
 }
