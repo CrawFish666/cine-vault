@@ -2,24 +2,24 @@
 
 ### Pages
 - [x] Movie Details
-- [ ] TV Show Details
+- [x] TV Show Details
 - [ ] Person details
-- [ ] HomePage like TMDB with trending day/week movies, latest trailers popular/streaming/ontv/etc, free to watch or What's popular
+- [x] HomePage like TMDB with trending day/week movies, latest trailers popular/streaming/ontv/etc, free to watch or What's popular
 
 ### Search
 
-- [ ] Доработать страницу поиска
-- [ ] Вынести SearchPanel из контекста страницы и закрепить под Header
-- [ ] Реализовать sticky-поведение SearchPanel
-- [ ] Скрывать Header при прокрутке вниз, при scroll back отображать
-- [ ] Показывать SearchPanel при прокрутке вниз, если он был открыт
+- [x] Доработать страницу поиска
+- [x] Вынести SearchPanel из контекста страницы и закрепить под Header
+- [x] Реализовать sticky-поведение SearchPanel
+- [x] Скрывать Header при прокрутке вниз, при scroll back отображать
+- [x] Показывать SearchPanel при прокрутке вниз, если он был открыт
 - [ ] Добавить постраничную пагинацию результатов поиска
-- [ ] Продумать UX поиска на мобильных устройствах
-- [ ] Продумать поиск через бургер-меню
+- [x] Продумать UX поиска на мобильных устройствах
+- [x] Продумать поиск через бургер-меню
 
 ### Watchlist
 
-- [ ] Доработать страницу Watchlist
+- [x] Доработать страницу Watchlist
 - [ ] Показывать сообщение, если фильмы отсутствуют
 - [ ] Показывать сообщение, если сериалы отсутствуют
 - [ ] Получать данные из Zustand store
@@ -28,8 +28,8 @@
 ### Footer
 
 - [ ] Добавить отдельный блок Social Links
-- [ ] Добавить навигацию по секциям страницы через `id`
-- [ ] Сделать плавный скролл к соответствующим секциям
+- [x] Добавить навигацию по секциям страницы через `id`
+- [x] Сделать плавный скролл к соответствующим секциям
 
 ### Optimization
 
@@ -45,4 +45,4 @@
 
 - [ ] Добавить loading-состояния
 - [ ] Добавить обработку ошибок
-- [ ] Проверить адаптивность
+- [x] Проверить адаптивность
