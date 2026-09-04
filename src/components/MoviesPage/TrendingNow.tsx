@@ -12,14 +12,19 @@ import { useVisibleSlides } from "../../hooks/useVisibleSlides";
 import { useMovieRuntimes } from "../../hooks/useMovieRuntimes";
 import { uniqueById } from "../../utils/array";
 import { WatchlistButton } from "../WatchlistButton";
+import { useState } from "react";
+import type { TrendingNowParams } from "../../api/movies";
+import { ROUTES } from "../../routes/pathConstants";
 
 export function TrendingNow() {
+
+	const [timeWindow, setTimeWindow] = useState<TrendingNowParams["time_window"]>("day")
 
 	const { data,
 		fetchNextPage,
 		hasNextPage,
 		isFetchingNextPage } = useTrendingNowMovies({
-			time_window: "day"
+			time_window: timeWindow
 		})
 
 	const allData = uniqueById(data?.pages.flatMap(page => page.results) ?? [])
@@ -71,18 +76,43 @@ export function TrendingNow() {
 				scrollPrev={scrollPrev}
 				scrollNext={scrollNext}
 			/>
+			<div className="flex gap-3 mb-10">
+				<button
+					onClick={() => {
+						setTimeWindow("day")
+						emblaApi?.scrollTo(0);
+					}}
+					className={`px-6 py-3 rounded-lg transition-colors ${timeWindow === "day"
+							? "bg-primary-45 text-white cursor-not-allowed"
+							: "bg-surface-08 border border-surface-15 text-neutral-60 cursor-pointer"
+						}`}
+				>
+					Сегодня
+				</button>
+
+				<button
+					onClick={() => {
+						setTimeWindow("week")
+						emblaApi?.scrollTo(0);
+					}}
+					className={`px-6 py-3 rounded-lg transition-colors ${timeWindow === "week"
+							? "bg-primary-45 text-white cursor-not-allowed"
+							: "bg-surface-08 border border-surface-15 text-neutral-60 cursor-pointer"
+						}`}
+				>
+					Неделя
+				</button>
+			</div>
 			<Carousel emblaRef={emblaRef} className="gap-5">
 				{allData.map((item, index) => {
 					const runtime = runtimes[index]?.data;
 
 					return (
-						<CarouselSlide key={item.id} className="basis-[181px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] lg:basis-[calc((100%-80px)/5)]">
-							<CarouselCard className="flex flex-col p-3 h-[clamp(259px,calc(4.667vw+240.8px),308px)] laptop:h-[clamp(308px,calc(14.375vw+101px),377px)]">
+						<CarouselSlide key={item.id} className="relative basis-[181px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] lg:basis-[calc((100%-80px)/5)]">
+							<CarouselCard to={ROUTES.MOVIE_DETAILS_BY_ID(item.id)} className="flex flex-col p-3 h-[clamp(259px,calc(4.667vw+240.8px),308px)] laptop:h-[clamp(308px,calc(14.375vw+101px),377px)]">
 								<div className="relative mb-3 flex-1 min-h-0">
 									
-									<WatchlistButton
-										className="absolute right-3 top-3"
-										item={{ id: item.id, mediaType: "movie", posterPath: item.poster_path, title: item.title, voteAverage: item.vote_average }} />
+
 									<img className="rounded-[10px] w-full h-full object-cover" src={`https://image.tmdb.org/t/p/original${item.poster_path}`} />
 								</div>
 
@@ -99,6 +129,9 @@ export function TrendingNow() {
 									</div>
 								</div>
 							</CarouselCard>
+							<WatchlistButton
+								className="absolute right-6 top-6"
+								item={{ id: item.id, mediaType: "movie", posterPath: item.poster_path, title: item.title, voteAverage: item.vote_average }} />
 						</CarouselSlide>
 					)
 				})}
