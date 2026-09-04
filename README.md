@@ -1,7 +1,7 @@
 ## TODO
 
 ### Pages
-- [ ] Movie Details
+- [x] Movie Details
 - [ ] TV Show Details
 - [ ] Person details
 - [ ] HomePage like TMDB with trending day/week movies, latest trailers popular/streaming/ontv/etc, free to watch or What's popular
