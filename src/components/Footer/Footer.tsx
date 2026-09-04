@@ -7,7 +7,7 @@ export function Footer() {
 
 	return (
 		<footer className="bg-surface-06 text-white">
-			<div className="w-full laptop:max-w-[1280px] desktop:max-w-[1600px] mx-auto px-4 laptop:px-0">
+			<div className="w-full max-w-[1600px] mx-auto px-4 min-[1280px]:px-[clamp(16px,calc(15vw_-_176px),40px)] laptop:px-10 2xl:px-[clamp(0px,calc(-10.417vw_+_200px),40px)]">
 				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 mb-12.5   pt-20 pb-10">
 					{navLinks.map((navLink) => {
 						const sections = sectionLinks[navLink.to] ?? [];
