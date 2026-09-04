@@ -1,4 +1,4 @@
-import {type Movie, type MultiSearchResult, type Paginated, type Person, type TVShow } from "../types/tmdb";
+import { type Movie, type MultiSearchResult, type Paginated, type Person, type TVShow } from "../types/tmdb";
 import { tmdbClient } from "./client";
 
 export interface MultiSearchParams {
@@ -29,7 +29,9 @@ export const searchApi = {
 		include_adult = false,
 		language = "ru-RU",
 		page = 1,
-	}: MultiSearchParams) => tmdbClient.get<Paginated<Movie>>("/search/movie", { params: { query, include_adult, language, page } }).then(res => res.data),
+	}: MultiSearchParams) =>
+		tmdbClient.get<Paginated<Movie>>("/search/movie", { params: { query, include_adult, language, page } }).
+			then(res => res.data),
 	tv: ({
 		query,
 		include_adult = false,
