@@ -92,6 +92,9 @@ export interface MovieDetails {
 	video: boolean;
 	vote_average: number;
 	vote_count: number;
+
+	credits?: MovieCredits;
+	videos?: MovieVideos;
 }
 
 export type MovieRuntime = Pick<MovieDetails, "id" | "runtime">;
@@ -223,6 +226,22 @@ export interface TVShowEpisode {
 	season_number: number;
 	show_id: number;
 	still_path: string | null;
+
+	crew?: CrewMember[];
+	guest_stars?: CastMember[];
+}
+
+export interface TVShowSeasonDetails {
+	_id: string;
+	air_date: string | null;
+	episodes: TVShowEpisode[];
+	name: string;
+	networks: TVShowNetwork[];
+	overview: string;
+	id: number;
+	poster_path: string | null;
+	season_number: number;
+	vote_average: number;
 }
 
 export interface TVShowDetails extends TVShow {
@@ -245,4 +264,172 @@ export interface TVShowDetails extends TVShow {
 	status: string;
 	tagline: string;
 	type: string;
+
+	aggregate_credits?: TVShowAggregateCredits;
+	videos?: TvShowVideos;
+	external_ids?: ExternalIds;
+}
+
+export interface ExternalIds {
+	id: number;
+	imdb_id: string | null;
+	freebase_mid: string | null;
+	freebase_id: string | null;
+	tvdb_id: number | null;
+	tvrage_id: number | null;
+	wikidata_id: string | null;
+	facebook_id: string | null;
+	instagram_id: string | null;
+	twitter_id: string | null;
+}
+export interface CastMember {
+	adult: boolean;
+	gender: number;
+	id: number;
+	known_for_department: string;
+	name: string;
+	original_name: string;
+	popularity: number;
+	profile_path: string | null;
+	cast_id: number;
+	character: string;
+	credit_id: string;
+	order: number;
+}
+
+export interface CrewMember {
+	adult: boolean;
+	gender: number;
+	id: number;
+	known_for_department: string;
+	name: string;
+	original_name: string;
+	popularity: number;
+	profile_path: string | null;
+	credit_id: string;
+	department: string;
+	job: string;
+}
+
+export interface MovieReview {
+	author: string;
+	author_details: {
+		name: string;
+		username: string;
+		avatar_path: string | null;
+		rating: number | null;
+	};
+	content: string;
+	created_at: string;
+	id: string;
+	updated_at: string;
+	url: string;
+}
+
+export interface MovieVideos {
+	id: number;
+	results: MovieVideo[];
+}
+export interface TvShowVideos {
+	id: number;
+	results: TvShowVideo[];
+}
+
+export interface MovieVideo {
+	iso_639_1: string;
+	iso_3166_1: string;
+	name: string;
+	key: string;
+	site: string;
+	size: number;
+	type: string;
+	official: boolean;
+	published_at: string;
+	id: string;
+}
+export interface TvShowVideo {
+	iso_639_1: string;
+	iso_3166_1: string;
+	name: string;
+	key: string;
+	site: string;
+	size: number;
+	type: string;
+	official: boolean;
+	published_at: string;
+	id: string;
+}
+
+export interface MovieCredits {
+	id: number;
+	cast: CastMember[];
+	crew: CrewMember[];
+}
+export interface TvShowCredits {
+	id: number;
+	cast: CastMember[];
+	crew: CrewMember[];
+}
+
+export interface MediaReviewAuthorDetails {
+	name: string;
+	username: string;
+	avatar_path: string | null;
+	rating: number | null;
+}
+
+export interface MediaReview {
+	author: string;
+	author_details: MediaReviewAuthorDetails;
+	content: string;
+	created_at: string;
+	id: string;
+	updated_at: string;
+	url: string;
+}
+
+export interface TVShowAggregateCastRole {
+	credit_id: string;
+	character: string;
+	episode_count: number;
+	total_episode_count: number;
+}
+
+export interface TVShowAggregateCastMember {
+	adult: boolean;
+	gender: number;
+	id: number;
+	known_for_department: string;
+	name: string;
+	original_name: string;
+	popularity: number;
+	profile_path: string | null;
+	roles: TVShowAggregateCastRole[];
+	order: number;
+}
+
+export interface TVShowAggregateCrewJob {
+	credit_id: string;
+	job: string;
+	episode_count: number;
+	total_episode_count: number;
+}
+
+export interface TVShowAggregateCrewMember {
+	adult: boolean;
+	gender: number;
+	id: number;
+	known_for_department: string;
+	name: string;
+	original_name: string;
+	popularity: number;
+	profile_path: string | null;
+	jobs: TVShowAggregateCrewJob[];
+	department: string;
+}
+
+export interface TVShowAggregateCredits {
+	id: number;
+	cast: TVShowAggregateCastMember[];
+	crew: TVShowAggregateCrewMember[];
 }
