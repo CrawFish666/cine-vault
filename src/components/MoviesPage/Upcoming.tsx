@@ -7,13 +7,14 @@ import { CarouselCard } from '../carousel/CarouselCard';
 import { CarouselSlide } from '../carousel/CarouselSlide';
 import { useCarouselController } from '../../hooks/useCarouselController';
 import { WatchlistButton } from '../WatchlistButton';
+import { ROUTES } from '../../routes/pathConstants';
 
 
 
 
 
 export function Upcoming() {
-	const { data } = useUpcomingMovies();
+	const { data, isLoading, isFetching } = useUpcomingMovies();
 
 	const {
 		emblaRef,
@@ -41,7 +42,7 @@ export function Upcoming() {
 
 
 	return (
-		<section className="">
+		<section id="upcoming-movies" className="">
 
 			<CarouselHeader
 				title='Скоро в кино'
@@ -55,12 +56,18 @@ export function Upcoming() {
 				scrollNext={scrollNext} />
 
 			<Carousel emblaRef={emblaRef} className='gap-5'>
-				{data?.results.map(item => (
-					<CarouselSlide key={item.id} className='basis-[178px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] xl:basis-[calc((100%-80px)/5)]'>
-						<CarouselCard className='flex flex-col py-2.5 px-1 sm:p-3.5  laptop:p-5 h-[clamp(259px,calc(4.667vw+238.8px),308px)] laptop:h-[clamp(308px,calc(14.375vw+99px),375px)]'>
+				{isFetching && (
+					Array.from({ length: 5 }).map((_, i) => (
+						<CarouselSlide key={i} className='relative basis-[178px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] xl:basis-[calc((100%-80px)/5)]'>
+							<div className='flex flex-col bg-surface-10 py-2.5 px-1 sm:p-3.5 laptop:p-5 h-[clamp(259px,calc(4.667vw+238.8px),308px)] laptop:h-[clamp(308px,calc(14.375vw+99px),375px)] bg-surface-08 rounded-[10px] animate-pulse' />
+						</CarouselSlide>
+					))
+				)}
+				{!isFetching && data?.results.map(item => (
+					<CarouselSlide key={item.id} className='relative basis-[178px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] xl:basis-[calc((100%-80px)/5)]'>
+						<CarouselCard to={ROUTES.MOVIE_DETAILS_BY_ID(item.id)} className='flex flex-col py-2.5 px-1 sm:p-3.5  laptop:p-5 h-[clamp(259px,calc(4.667vw+238.8px),308px)] laptop:h-[clamp(308px,calc(14.375vw+99px),375px)]'>
 							<div className="relative min-h-0 flex-1 overflow-hidden rounded-[10px] mb-2.5 px-1.5 sm:px-0">
-								<WatchlistButton className="absolute right-3 top-3"
-									item={{ id: item.id, mediaType: "movie", posterPath: item.poster_path, title: item.title, voteAverage: item.vote_average }} />
+								
 								<img className="object-cover rounded-[10px] w-full h-full" src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}></img>
 							</div>
 							<p className="shrink-0 bg-surface-08 border border-surface-15 rounded-[51px] py-1 px-3 2xl:px-6 font-medium text-xs flex justify-center sm:self-center">
@@ -68,6 +75,8 @@ export function Upcoming() {
 								<span className="text-neutral-75">{item.release_date}</span>
 							</p>
 						</CarouselCard>
+						<WatchlistButton className="absolute right-6 top-6"
+							item={{ id: item.id, mediaType: "movie", posterPath: item.poster_path, title: item.title, voteAverage: item.vote_average }} />
 					</CarouselSlide>
 				))}
 			</Carousel>
