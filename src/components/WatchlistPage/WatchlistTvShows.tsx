@@ -1,4 +1,5 @@
 import { useCarouselController } from "../../hooks/useCarouselController";
+import { ROUTES } from "../../routes/pathConstants";
 import { useWatchListStore } from "../../store/watchlistStore";
 import { formatVoteCount } from "../../utils/format";
 import { Carousel } from "../carousel/Carousel";
@@ -65,19 +66,17 @@ export function WatchlistTvShows() {
 				{data.map((item, index) => {
 					console.log(item)
 					return (
-						<CarouselSlide key={item.id} className="basis-[231px] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] lg:basis-[calc((100%-40px)/3)] xl:basis-[calc((100%-60px)/4)]">
-							<CarouselCard className="flex flex-col p-2.5 lg:p-4 2xl:p-5 h-[clamp(303px,calc(9.62vw+263.5px),404px)] laptop:h-[clamp(404px,calc(20vw+114px),500px)]">
+						<CarouselSlide key={item.id} className="relative basis-[231px] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] lg:basis-[calc((100%-40px)/3)] xl:basis-[calc((100%-60px)/4)]">
+							<CarouselCard to={ROUTES.TV_SHOWS_DETAILS_BY_ID(item.id)} className="flex flex-col p-2.5 lg:p-4 2xl:p-5 h-[clamp(303px,calc(9.62vw+263.5px),404px)] laptop:h-[clamp(404px,calc(20vw+114px),500px)]">
 
 								<div className="relative min-h-0 flex-1 overflow-hidden mb-3 lg:mb-4 2xl:mb-5">
 
-									<WatchlistButton className="absolute right-3 top-3"
-										item={{ id: item.id, mediaType: "tv", posterPath: item.posterPath, title: item.title, voteAverage: item.voteAverage }} />
 									<img className="object-cover rounded-[10px] w-full h-full" src={`https://image.tmdb.org/t/p/w500${item.posterPath}`} />
 								</div>
 
 								<div className="flex flex-col items-center self-center shrink-0 gap-1">
 
-									<div className="line-clamp-1">
+									<div className="line-clamp-1 text-white font-medium text-base text-center">
 										{item.title}
 									</div>
 
@@ -88,6 +87,9 @@ export function WatchlistTvShows() {
 
 								</div>
 							</CarouselCard>
+
+							<WatchlistButton className="absolute right-6 top-6"
+								item={{ id: item.id, mediaType: "tv", posterPath: item.posterPath, title: item.title, voteAverage: item.voteAverage }} />
 						</CarouselSlide>
 					)
 				})}
