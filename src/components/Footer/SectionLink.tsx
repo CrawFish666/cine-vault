@@ -12,6 +12,7 @@ export function SectionLink({
 	label,
 }: SectionLinkProps) {
 	return (
+
 		<Link to={`${to}#${id}`}>
 			{label}
 		</Link>
