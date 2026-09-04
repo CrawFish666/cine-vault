@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 
 
 import { useSearchMovies } from "../hooks/Search/useSearchMovies";
 import { useSearchTVShows } from "../hooks/Search/useSearchTVShows";
 import { useSearchPeople } from "../hooks/Search/useSearchPeople";
+import { ROUTES } from "../routes/pathConstants";
 
 // import { useSearchMovies } from "../../hooks/Search/useSearchMovies";
 // import { useSearchTVShows } from "../../hooks/Search/useSearchTVShows";
@@ -71,7 +72,7 @@ export function SearchPage() {
 		isPeopleLoading;
 
 	return (
-		<div className="w-full max-w-[1600px] mx-auto px-4 py-8">
+		<div className="py-8 flex flex-col gap-[80px] laptop:gap-[100px] desktop:gap-[180px]">
 			<div className="grid grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)] gap-8">
 
 				{/* Sidebar */}
@@ -149,40 +150,41 @@ export function SearchPage() {
 					{!isLoading && activeTab === "movie" && (
 						<div className="flex flex-col gap-4">
 							{movieResults.map((movie) => (
-								<article
-									key={movie.id}
-									className="flex overflow-hidden rounded-xl border border-surface-15 bg-surface-10"
-								>
-									<div className="w-[100px] shrink-0 bg-surface-15">
-										{movie.poster_path && (
-											<img
-												src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-												alt={movie.title}
-												className="w-full h-full object-cover"
-											/>
-										)}
-									</div>
+								<Link to={ROUTES.MOVIE_DETAILS_BY_ID(movie.id)} key={movie.id}>
+									<article
+										
+										className="flex overflow-hidden rounded-xl border border-surface-15 bg-surface-10"
+									>
+										<div className="w-[100px] shrink-0 bg-surface-15">
+											{movie.poster_path && (
+												<img
+													src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+													alt={movie.title}
+													className="w-full h-full object-cover"
+												/>
+											)}
+										</div>
 
-									<div className="min-w-0 p-4">
-										<h2 className="font-semibold text-white">
-											{movie.title}
-										</h2>
+										<div className="min-w-0 p-4">
+											<h2 className="font-semibold text-white">
+												{movie.title}
+											</h2>
 
-										{movie.original_title !== movie.title && (
-											<p className="mt-1 text-sm text-gray-400">
-												{movie.original_title}
+											{movie.original_title !== movie.title && (
+												<p className="mt-1 text-sm text-gray-400">
+													{movie.original_title}
+												</p>
+											)}
+
+											<p className="mt-2 text-sm text-gray-400">
+												{movie.release_date || "—"}
 											</p>
-										)}
 
-										<p className="mt-2 text-sm text-gray-400">
-											{movie.release_date || "—"}
-										</p>
-
-										<p className="mt-3 text-sm leading-6 text-gray-300 line-clamp-3">
-											{movie.overview || "No overview available."}
-										</p>
-									</div>
-								</article>
+											<p className="mt-3 text-sm leading-6 text-gray-300 line-clamp-3">
+												{movie.overview || "No overview available."}
+											</p>
+										</div>
+									</article></Link>
 							))}
 						</div>
 					)}
@@ -190,40 +192,41 @@ export function SearchPage() {
 					{!isLoading && activeTab === "tv" && (
 						<div className="flex flex-col gap-4">
 							{tvResults.map((show) => (
-								<article
-									key={show.id}
-									className="flex overflow-hidden rounded-xl border border-surface-15 bg-surface-10"
-								>
-									<div className="w-[100px] shrink-0 bg-surface-15">
-										{show.poster_path && (
-											<img
-												src={`https://image.tmdb.org/t/p/w200${show.poster_path}`}
-												alt={show.name}
-												className="w-full h-full object-cover"
-											/>
-										)}
-									</div>
+								<Link key={show.id} to={ROUTES.TV_SHOWS_DETAILS_BY_ID(show.id)}>
+									<article
+										
+										className="flex overflow-hidden rounded-xl border border-surface-15 bg-surface-10"
+									>
+										<div className="w-[100px] shrink-0 bg-surface-15">
+											{show.poster_path && (
+												<img
+													src={`https://image.tmdb.org/t/p/w200${show.poster_path}`}
+													alt={show.name}
+													className="w-full h-full object-cover"
+												/>
+											)}
+										</div>
 
-									<div className="min-w-0 p-4">
-										<h2 className="font-semibold text-white">
-											{show.name}
-										</h2>
+										<div className="min-w-0 p-4">
+											<h2 className="font-semibold text-white">
+												{show.name}
+											</h2>
 
-										{show.original_name !== show.name && (
-											<p className="mt-1 text-sm text-gray-400">
-												{show.original_name}
+											{show.original_name !== show.name && (
+												<p className="mt-1 text-sm text-gray-400">
+													{show.original_name}
+												</p>
+											)}
+
+											<p className="mt-2 text-sm text-gray-400">
+												{show.first_air_date || "—"}
 											</p>
-										)}
 
-										<p className="mt-2 text-sm text-gray-400">
-											{show.first_air_date || "—"}
-										</p>
-
-										<p className="mt-3 text-sm leading-6 text-gray-300 line-clamp-3">
-											{show.overview || "No overview available."}
-										</p>
-									</div>
-								</article>
+											<p className="mt-3 text-sm leading-6 text-gray-300 line-clamp-3">
+												{show.overview || "No overview available."}
+											</p>
+										</div>
+									</article></Link>
 							))}
 						</div>
 					)}
