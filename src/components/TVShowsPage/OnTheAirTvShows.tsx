@@ -1,7 +1,5 @@
-import { Clock3 } from "lucide-react";
 import { useCarouselController } from "../../hooks/useCarouselController";
-import { useMustWatchMovies } from "../../hooks/useMustWatchMovies";
-import { formatRuntime, formatVoteCount } from "../../utils/format";
+import { formatVoteCount } from "../../utils/format";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
 import { CarouselHeader } from "../carousel/CarouselHeader";
@@ -10,10 +8,7 @@ import { CarouselSlide } from "../carousel/CarouselSlide";
 import { StarRaiting } from "../StarRating";
 import { useInfiniteScrollTrigger } from "../../hooks/useInfiniteScrollTrigger";
 import { useVisibleSlides } from "../../hooks/useVisibleSlides";
-import { useMovieRuntimes } from "../../hooks/useMovieRuntimes";
 import { WatchlistButton } from "../WatchlistButton";
-import { useMustWatchTVShows } from "../../hooks/TVShows/useMustWatchTVShows";
-import { useAiringTodayTVShows } from "../../hooks/TVShows/useAiringTodayTVShows";
 import { useOnTheAirTVShows } from "../../hooks/TVShows/useOnTheAirTVShows";
 import { useTVShowCardDetails } from "../../hooks/TVShows/useTVShowCardDetails";
 import { ROUTES } from "../../routes/pathConstants";
@@ -84,13 +79,13 @@ export function OnTheAirTvShows() {
 				scrollNext={scrollNext} />
 			{isLoading ?
 				(
-					<CarouselSkeleton 
-					count={4} 
-						slideClassName="basis-[231px] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] lg:basis-[calc((100%-40px)/3)] xl:basis-[calc((100%-60px)/4)] h-[clamp(303px,calc(9.62vw+263.5px),404px)] laptop:h-[clamp(404px,calc(20vw+114px),500px)]" 
-					gapClassName="gap-4 lg:gap-5"/>
+					<CarouselSkeleton
+						count={4}
+						slideClassName="basis-[231px] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] lg:basis-[calc((100%-40px)/3)] xl:basis-[calc((100%-60px)/4)] h-[clamp(303px,calc(9.62vw+263.5px),404px)] laptop:h-[clamp(404px,calc(20vw+114px),500px)]"
+						gapClassName="gap-4 lg:gap-5" />
 				)
-					:
-					(
+				:
+				(
 					<Carousel emblaRef={emblaRef} className="gap-4 lg:gap-5">
 						{allData.map((item, index) => {
 							const details = detailsData[index].data;
@@ -131,7 +126,7 @@ export function OnTheAirTvShows() {
 							)
 						})}
 					</Carousel>
-					)}
+				)}
 			{isMobile && <CarouselProgress scrollProgress={scrollProgress} />}
 		</section>
 	)

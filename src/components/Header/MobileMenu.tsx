@@ -1,6 +1,5 @@
-import { type FormEvent, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { Bookmark, Search } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { Bookmark } from "lucide-react";
 import { ROUTES } from "../../routes/pathConstants";
 import { NavLinkList } from "./NavLinkList";
 import { SearchPanel } from "./SearchPanel";
@@ -10,11 +9,6 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ onClose }: MobileMenuProps) {
-	const [query, setQuery] = useState("");
-
-	function handleClose() {
-		console.log('close')
-	}
 
 
 	return (

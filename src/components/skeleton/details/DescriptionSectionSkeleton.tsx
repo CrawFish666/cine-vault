@@ -1,4 +1,4 @@
-import { LoaderCircle } from "lucide-react";
+
 
 
 export function DescriptionSectionSkeleton() {

@@ -8,7 +8,7 @@ import { uniqueById } from "../../utils/array";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselSlide } from "../carousel/CarouselSlide";
 import { CarouselCard } from "../carousel/CarouselCard";
-import { formatDate, formatDateTime } from "../../utils/date";
+import { formatDateTime } from "../../utils/date";
 import { StarRaiting } from "../StarRating";
 import { CarouselControls } from "../carousel/CarouselControls";
 
@@ -22,12 +22,10 @@ export function ReviewsSection({ id, mediaType }: ReviewsSectionProps) {
 	const {
 		emblaRef,
 		emblaDotsRef,
-		isMobile,
 		prevButtonDisabled,
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		scrollProgress,
 		scrollPrev,
 		scrollNext,
 		emblaApi

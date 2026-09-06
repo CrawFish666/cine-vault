@@ -1,14 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useMovieDetails } from "../hooks/useMovieDetails"
-import { ArrowLeft, ArrowRight, Calendar, ImageOff, List, Play, Share2, Star } from "lucide-react";
-import { Carousel } from "../components/carousel/Carousel";
-import { useCarouselController } from "../hooks/useCarouselController";
-import { CarouselSlide } from "../components/carousel/CarouselSlide";
-import { CarouselCard } from "../components/carousel/CarouselCard";
-import { formatDate } from "../utils/date";
-import { StarRaiting } from "../components/StarRating";
 import { useState } from "react";
-import { WatchlistButton } from "../components/WatchlistButton";
 import { HeroBanner } from "../components/details/hero/HeroBanner";
 import { DescriptionSection } from "../components/details/DescriptionSection";
 import { ReleaseDateInfo } from "../components/details/ReleaseDateInfo";
@@ -19,14 +10,6 @@ import { CastSection } from "../components/details/CastSection";
 import { ReviewsSection } from "../components/details/ReviewsSection";
 import { useTvShowDetails } from "../hooks/TVShows/useTvShowDetails";
 import { SeasonsEpisodsSection } from "../components/details/SeasonsEpisodsSection";
-import { HeroBannerSkeleton } from "../components/skeleton/details/HeroBannerSkeleton";
-import { DescriptionSectionSkeleton } from "../components/skeleton/details/DescriptionSectionSkeleton";
-import { ReleaseDateInfoSkeleton } from "../components/skeleton/details/ReleaseDateInfoSkeleton";
-import { RatingInfoSkeleton } from "../components/skeleton/details/RatingInfoSkeleton";
-import { GenresInfoSkeleton } from "../components/skeleton/details/GenresInfoSkeleton";
-import { PersonInfoSkeleton } from "../components/skeleton/details/PersonInfoSkeleton";
-import { CastSectionSkeleton } from "../components/skeleton/details/CastSectionSketelon";
-import { SeasonsEpisodsSectionSkeleton } from "../components/skeleton/details/SeasonsEpisodsSectionSkeleton";
 import { TvShowDetailsPageSkeleton } from "../components/skeleton/TvShowDetailsPageSkeleton";
 
 export function TvShowDetailsPage() {
@@ -35,7 +18,7 @@ export function TvShowDetailsPage() {
 
 	const [isTrailerOpen, setIsTrailerOpen] = useState(false);
 
-	const { data, isLoading, isError, isPending } = useTvShowDetails(tvShowId);
+	const { data, isLoading, isError } = useTvShowDetails(tvShowId);
 
 	// Сделать адаптив как в MovieDetails!! И проверить сколько прокрутов карусели т.к. много брейкпоинтов
 

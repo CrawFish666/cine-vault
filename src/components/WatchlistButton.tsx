@@ -1,5 +1,5 @@
 import { Bookmark } from "lucide-react";
-import { useWatchListStore, type WatchListItem, type WatchListItemInput } from "../store/watchlistStore";
+import { useWatchListStore, type WatchListItemInput } from "../store/watchlistStore";
 
 interface WatchlistButtonProps {
 	item: WatchListItemInput;

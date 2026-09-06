@@ -1,8 +1,6 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect,  useState } from "react"
 import Logo from "../../assets/Logo.svg?react"
-import { Bookmark, Menu, Search, X } from "lucide-react";
-import { Link, NavLink } from "react-router-dom";
-import { ROUTES } from "../../routes/pathConstants";
+import {  Menu,  X } from "lucide-react";
 import { DesktopNav } from "./DesktopNav";
 import { HeaderActions } from "./HeaderActions";
 import { MobileMenu } from "./MobileMenu";

@@ -1,7 +1,6 @@
 import { HeroActionButtons } from "./HeroActionButtons";
 import type { WatchListItemInput } from "../../../store/watchlistStore";
 import { getBackdropUrl } from "../../../utils/tmdbImage";
-import { handleImageError } from "../../../utils/handleImageError";
 import { TmdbImage } from "../../ui/TmdbImage";
 
 interface HeroBannerProps {

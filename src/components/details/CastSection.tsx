@@ -1,6 +1,5 @@
 import { useCarouselController } from "../../hooks/useCarouselController";
 import type { CastMember, TVShowAggregateCastMember } from "../../types/tmdb";
-import { handleImageError } from "../../utils/handleImageError";
 import { getProfileUrl } from "../../utils/tmdbImage";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
@@ -19,16 +18,10 @@ export function CastSection({ cast }: CastSectionProps) {
 
 	const {
 		emblaRef,
-		emblaDotsRef,
-		isMobile,
 		prevButtonDisabled,
 		nextButtonDisabled,
-		selectedIndex,
-		scrollSnaps,
-		scrollProgress,
 		scrollPrev,
 		scrollNext,
-		emblaApi
 	} = useCarouselController({
 		align: "start",
 		dragFree: false,
@@ -55,10 +48,6 @@ export function CastSection({ cast }: CastSectionProps) {
 					variant="circle"
 					showPagination={false}
 					controlsVisibility="always"
-
-				// emblaDotsRef={emblaDotsRef}
-				// selectedIndex={selectedIndex}
-				// scrollSnaps={scrollSnaps}
 
 				/>
 			</CarouselHeader2>

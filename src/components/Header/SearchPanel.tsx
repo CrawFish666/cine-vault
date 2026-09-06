@@ -1,4 +1,4 @@
-import { Search, X } from "lucide-react";
+import { Search } from "lucide-react";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -6,7 +6,7 @@ import { useSearchMulti } from "../../hooks/Search/useSearchMulti";
 import { SearchResults } from "./SearchResults";
 
 
-type SearchTab = "movie" | "tv" | "person";
+// type SearchTab = "movie" | "tv" | "person";
 
 interface SearchPanelProps {
 	onClose: () => void;

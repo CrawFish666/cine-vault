@@ -7,9 +7,6 @@ import { useSearchTVShows } from "../hooks/Search/useSearchTVShows";
 import { useSearchPeople } from "../hooks/Search/useSearchPeople";
 import { ROUTES } from "../routes/pathConstants";
 
-// import { useSearchMovies } from "../../hooks/Search/useSearchMovies";
-// import { useSearchTVShows } from "../../hooks/Search/useSearchTVShows";
-// import { useSearchPeople } from "../../hooks/Search/useSearchPeople";
 
 type SearchTab = "movie" | "tv" | "person";
 

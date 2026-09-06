@@ -1,7 +1,6 @@
 import { useCarouselController } from "../../hooks/useCarouselController";
 import { ROUTES } from "../../routes/pathConstants";
 import { useWatchListStore } from "../../store/watchlistStore";
-import { formatVoteCount } from "../../utils/format";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
 import { CarouselHeader } from "../carousel/CarouselHeader";
@@ -26,7 +25,6 @@ export function WatchlistTvShows() {
 		scrollProgress,
 		scrollPrev,
 		scrollNext,
-		emblaApi
 	} = useCarouselController({
 		align: "start",
 		dragFree: false,
@@ -41,13 +39,6 @@ export function WatchlistTvShows() {
 		}
 	})
 
-	// useInfiniteScrollTrigger({
-	// 	emblaApi,
-	// 	// itemsCount: allData.length,
-	// 	hasNextPage,
-	// 	isFetchingNextPage,
-	// 	fetchNextPage
-	// })
 
 
 	return (
@@ -63,7 +54,7 @@ export function WatchlistTvShows() {
 				scrollPrev={scrollPrev}
 				scrollNext={scrollNext} />
 			<Carousel emblaRef={emblaRef} className="gap-4 lg:gap-5">
-				{data.map((item, index) => {
+				{data.map((item) => {
 					console.log(item)
 					return (
 						<CarouselSlide key={item.id} className="relative basis-[231px] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] lg:basis-[calc((100%-40px)/3)] xl:basis-[calc((100%-60px)/4)]">

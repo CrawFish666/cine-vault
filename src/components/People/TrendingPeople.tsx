@@ -1,4 +1,3 @@
-import { usePopularPeople } from "../../hooks/People/usePopularPeople";
 import { CarouselProgress } from "../carousel/CarouselProgress";
 import { useCarouselController } from "../../hooks/useCarouselController";
 import { Carousel } from "../carousel/Carousel";
@@ -73,7 +72,7 @@ export function TrendingPeople() {
 					gapClassName="gap-4 lg:gap-5" />)
 				:
 				(<Carousel emblaRef={emblaRef} className="gap-4 lg:gap-5">
-					{allData.map((item, index) => {
+					{allData.map((item) => {
 						console.log(item)
 						return (
 							<CarouselSlide key={item.id} className="basis-[181px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] lg:basis-[calc((100%-80px)/5)]">

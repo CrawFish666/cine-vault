@@ -1,5 +1,5 @@
 import { useQueries } from "@tanstack/react-query";
-import type { TVShow, TVShowDetails } from "../../types/tmdb";
+import type { TVShow } from "../../types/tmdb";
 import { tvshowsApi } from "../../api/tvshows";
 
 

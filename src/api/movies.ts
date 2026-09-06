@@ -2,7 +2,7 @@ import { type Movie,
 	type Paginated, 
 	type DatedMovieResponse, 
 	type GenresListResponse, type TrendingNowMovie, type MovieRuntime, type MovieDetails, 
-	type MediaReview} from "../types/tmdb";
+	} from "../types/tmdb";
 import { tmdbClient } from "./client";
 
 export interface MovieListParams {

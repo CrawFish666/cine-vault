@@ -1,7 +1,7 @@
-import { ArrowDown, ArrowUp, Clock } from "lucide-react";
+import { ArrowDown,  Clock } from "lucide-react";
 import type { TVShowSeason } from "../../types/tmdb";
 import { pluralizeEpisodes } from "../../utils/pluralize";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useTVSeasonDetails } from "../../hooks/TVShows/useTVSeasonDetails";
 import { formatRuntime } from "../../utils/format";
 import { SeasonAccordionSkeleton } from "../skeleton/details/SeasonAccordionSkeleton";

@@ -18,7 +18,7 @@ import { sectionLinks } from '../Footer/sectionLinks';
 
 
 export function Upcoming() {
-	const { data, isLoading, isFetching } = useUpcomingMovies();
+	const { data, isLoading } = useUpcomingMovies();
 
 	const {
 		emblaRef,

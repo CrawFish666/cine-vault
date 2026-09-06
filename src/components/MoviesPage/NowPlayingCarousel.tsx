@@ -1,12 +1,11 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { useNowPlayingMovies } from "../../hooks/useNowPlayingMovies";
-import { ArrowLeft, ArrowRight, Bookmark, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { EmblaCarouselType } from "embla-carousel";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../routes/pathConstants";
 import { WatchlistButton } from "../WatchlistButton";
-import { IMDbButton } from "../details/hero/IMDbButton";
 import { TmdbImage } from "../ui/TmdbImage";
 import { getBackdropUrl } from "../../utils/tmdbImage";
 import { CarouselSkeleton } from "../skeleton/CarouselSkeleton";
@@ -28,7 +27,7 @@ export function NowPlayingCarousel() {
 		setSelectedSnap(emblaApi.selectedScrollSnap());
 	};
 
-	const { data, isPending, isLoading, isError, error } = useNowPlayingMovies();
+	const { data, isLoading } = useNowPlayingMovies();
 
 	const toggleButtonsDisabled = (emblaApi: EmblaCarouselType) => {
 		setPrevButtonDisabled(!emblaApi.canScrollPrev())
@@ -155,12 +154,4 @@ export function NowPlayingCarousel() {
 
 		</section>
 	)
-}
-
-function NowPlayingSkeleton() {
-	return (
-		<div className="relative flex-[0_0_100%] min-w-0 aspect-video max-h-[835px] border border-surface-15 bg-surface-15 rounded-xl overflow-hidden animate-pulse">
-			<div className="w-full h-full" />
-		</div>
-	);
 }

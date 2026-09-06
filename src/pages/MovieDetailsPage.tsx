@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useMovieDetails } from "../hooks/useMovieDetails"
 import { useState } from "react";
-import { WatchlistButton } from "../components/WatchlistButton";
 import { HeroBanner } from "../components/details/hero/HeroBanner";
 import { DescriptionSection } from "../components/details/DescriptionSection";
 import { ReleaseDateInfo } from "../components/details/ReleaseDateInfo";
@@ -10,7 +9,6 @@ import { GenresInfo } from "../components/details/GenresInfo";
 import { PersonInfo } from "../components/details/PersonInfo";
 import { CastSection } from "../components/details/CastSection";
 import { ReviewsSection } from "../components/details/ReviewsSection";
-import { useMediaReviews } from "../hooks/useMediaReviews";
 import { MovieDetailsPageSkeleton } from "../components/skeleton/MovieDetailsPageSkeleton";
 
 export function MovieDetailsPage() {

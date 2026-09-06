@@ -21,12 +21,10 @@ export function GenresMovieList() {
 	const {
 		emblaRef,
 		emblaDotsRef,
-		isMobile,
 		prevButtonDisabled,
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		scrollProgress,
 		scrollPrev,
 		scrollNext,
 		emblaApi
@@ -75,7 +73,7 @@ export function GenresMovieList() {
 								<CarouselSlide key={item.id} className="basis-[180px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] lg:basis-[calc((100%-80px)/5)]">
 									<CarouselCard className="text-white p-5 flex flex-col gap-2 h-[clamp(201px,calc(5.743vw+178.6px),259px)] laptop:h-[clamp(259px,calc(17.292vw+10px),342px)]">
 										<div className="grid grid-cols-2 grid-rows-2 gap-1 flex-1 min-h-0">
-											{posterPaths?.filter(item => item.poster_path).map((item, i) => (
+											{posterPaths?.filter(item => item.poster_path).map((item) => (
 												// <img className="w-full h-full object-cover rounded-sm" key={i} src={`https://image.tmdb.org/t/p/original${path}`} />
 												<TmdbImage key={item.id} className="w-full h-full rounded-sm"
 													alt={"test"}
