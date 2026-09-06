@@ -1,5 +1,5 @@
 import { useInfiniteQuery,  } from "@tanstack/react-query";
-import { moviesApi, type TrendingNowParams } from "../api/movies";
+import { moviesApi, type TrendingNowParams } from "../../api/movies";
 
 
 export function useTrendingNowMovies({ language = "ru-RU", time_window = "day" }: TrendingNowParams = {}) {

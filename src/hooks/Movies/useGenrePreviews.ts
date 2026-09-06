@@ -1,6 +1,6 @@
 import { useQueries } from "@tanstack/react-query";
-import type { Genre, Movie, Paginated } from "../types/tmdb";
-import { moviesApi } from "../api/movies";
+import type { Genre, Movie, Paginated } from "../../types/tmdb";
+import { moviesApi } from "../../api/movies";
 
 
 

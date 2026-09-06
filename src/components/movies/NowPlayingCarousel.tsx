@@ -1,5 +1,5 @@
 import useEmblaCarousel from "embla-carousel-react";
-import { useNowPlayingMovies } from "../../hooks/useNowPlayingMovies";
+import { useNowPlayingMovies } from "../../hooks/Movies/useNowPlayingMovies";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { EmblaCarouselType } from "embla-carousel";

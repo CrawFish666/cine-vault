@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useMovieDetails } from "../hooks/useMovieDetails"
+import { useMovieDetails } from "../hooks/Movies/useMovieDetails"
 import { useState } from "react";
 import { HeroBanner } from "../components/details/hero/HeroBanner";
 import { DescriptionSection } from "../components/details/DescriptionSection";

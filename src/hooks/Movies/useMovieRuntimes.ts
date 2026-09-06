@@ -1,6 +1,6 @@
 import { useQueries } from "@tanstack/react-query";
-import { moviesApi } from "../api/movies";
-import type { Movie, MovieRuntime } from "../types/tmdb";
+import { moviesApi } from "../../api/movies";
+import type { Movie, MovieRuntime } from "../../types/tmdb";
 
 
 export function useMovieRuntimes(movies: Movie[], visibleIndexes: Set<number>) {

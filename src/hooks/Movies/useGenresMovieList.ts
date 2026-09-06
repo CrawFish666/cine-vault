@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { moviesApi, type GenresMovieListParams } from "../api/movies";
+import { moviesApi, type GenresMovieListParams } from "../../api/movies";
 
 export function useGenresMovieList(params: GenresMovieListParams = {}) {
 	return useQuery({

@@ -1,6 +1,6 @@
 import { Clock3 } from "lucide-react";
 import { useCarouselController } from "../../hooks/useCarouselController";
-import { useMustWatchMovies } from "../../hooks/useMustWatchMovies";
+import { useMustWatchMovies } from "../../hooks/Movies/useMustWatchMovies";
 import { formatRuntime, formatVoteCount } from "../../utils/format";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
@@ -10,7 +10,7 @@ import { CarouselSlide } from "../carousel/CarouselSlide";
 import { StarRaiting } from "../StarRating";
 import { useInfiniteScrollTrigger } from "../../hooks/useInfiniteScrollTrigger";
 import { useVisibleSlides } from "../../hooks/useVisibleSlides";
-import { useMovieRuntimes } from "../../hooks/useMovieRuntimes";
+import { useMovieRuntimes } from "../../hooks/Movies/useMovieRuntimes";
 import { WatchlistButton } from "../WatchlistButton";
 import { ROUTES } from "../../routes/pathConstants";
 import { TmdbImage } from "../ui/TmdbImage";

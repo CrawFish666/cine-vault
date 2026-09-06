@@ -1,12 +1,12 @@
 import { ArrowRight } from "lucide-react";
 import { useCarouselController } from "../../hooks/useCarouselController";
-import { useGenresMovieList } from "../../hooks/useGenresMovieList"
+import { useGenresMovieList } from "../../hooks/Movies/useGenresMovieList"
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
 import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselSlide } from "../carousel/CarouselSlide";
 import { useVisibleSlides } from "../../hooks/useVisibleSlides";
-import { useGenrePreviews } from "../../hooks/useGenrePreviews";
+import { useGenrePreviews } from "../../hooks/Movies/useGenrePreviews";
 import { TmdbImage } from "../ui/TmdbImage";
 import { getPosterUrl } from "../../utils/tmdbImage";
 import { CarouselSkeleton } from "../skeleton/CarouselSkeleton";

@@ -1,5 +1,5 @@
 
-import { useUpcomingMovies } from '../../hooks/useUpcomingMovies';
+import { useUpcomingMovies } from '../../hooks/Movies/useUpcomingMovies';
 import { CarouselHeader } from '../carousel/CarouselHeader';
 import { CarouselProgress } from '../carousel/CarouselProgress';
 import { Carousel } from '../carousel/Carousel';

@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { moviesApi, type MustWatchParams } from "../api/movies";
+import { moviesApi, type MustWatchParams } from "../../api/movies";
 
 
 // Делаем пагинацию через tanstack query
