@@ -1,6 +1,6 @@
 import type { EmblaOptionsType, EmblaCarouselType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export function useCarouselController(mainOptions: EmblaOptionsType) {
@@ -30,25 +30,18 @@ export function useCarouselController(mainOptions: EmblaOptionsType) {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
-	// const [scrollProgress, setScrollProgress] = useState(0);
 
 	const toggleButtonsDisabled = (api: EmblaCarouselType) => {
 		setPrevButtonDisabled(!api.canScrollPrev());
 		setNextButtonDisabled(!api.canScrollNext());
 	};
 
-	// const onScroll = useCallback((api: EmblaCarouselType) => {
-	// 	if (!isMobile) return;
-	// 	const progress = Math.max(0, Math.min(1, api.scrollProgress()))
-	// 	setScrollProgress(progress * 100)
-	// }, [isMobile])
 
 	useEffect(() => {
 		if (!emblaApi) return;
 
 		setScrollSnaps(emblaApi.scrollSnapList());
 		toggleButtonsDisabled(emblaApi);
-		// onScroll(emblaApi);
 
 		const onSelect = () => {
 			const newIndex = emblaApi.selectedScrollSnap();
@@ -64,17 +57,10 @@ export function useCarouselController(mainOptions: EmblaOptionsType) {
 
 		emblaApi.on("select", onSelect);
 		emblaApi.on("reInit", onReInit);
-		// emblaApi.on("scroll", onScroll);
-		
-		// emblaApi.on("reInit", onScroll);
-		// emblaApi.on("slideFocus", onScroll);
 
 		return () => {
 			emblaApi.off("select", onSelect);
 			emblaApi.off("reInit", onReInit);
-			// emblaApi.off("scroll", onScroll);
-			// emblaApi.off("reInit", onScroll);
-			// emblaApi.off("slideFocus", onScroll);
 		};
 	}, [emblaApi, emblaDotsApi, ]);
 
@@ -90,7 +76,6 @@ export function useCarouselController(mainOptions: EmblaOptionsType) {
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		// scrollProgress,
 		scrollPrev,
 		scrollNext,
 		emblaApi
