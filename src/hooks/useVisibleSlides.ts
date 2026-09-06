@@ -25,7 +25,7 @@ export function useVisibleSlides(emblaApi: EmblaCarouselType | undefined) {
 		emblaApi.on("slidesInView", updateVisibleSlide);
 
 		return () => {
-			emblaApi.on("slidesInView", updateVisibleSlide);
+			emblaApi.off("slidesInView", updateVisibleSlide);
 		}
 
 	}, [emblaApi])
