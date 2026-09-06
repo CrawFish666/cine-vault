@@ -5,10 +5,10 @@ import { MoviesPage } from "../pages/MoviesPage";
 import { HomePage } from "../pages/HomePage";
 import { TVSHows } from "../pages/TVShowsPage";
 import { PeoplePage } from "../pages/PeoplePage";
-import { WatchlistPage } from "../pages/WatchlistPage";
 import { SearchPage } from "../pages/SearchPage";
 import { MovieDetailsPage } from "../pages/MovieDetailsPage";
 import { TvShowDetailsPage } from "../pages/TvShowDetailsPage";
+import { WatchlistPage } from "../pages/WatchlistPage";
 
 
 export function AppRoutes() {
