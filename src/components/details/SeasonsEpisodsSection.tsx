@@ -16,7 +16,7 @@ export function SeasonsEpisodsSection({ seriesId, seasons }: SeasonsEpisodsSecti
 			</h2>
 
 
-			<div className="flex flex-col gap-5">
+			<div className="[overflow-anchor:none] flex flex-col gap-5">
 
 				{seasons.filter((season) => season.episode_count > 0).map((season) => (
 					<SeasonAccordion key={season.id} season={season} seriesId={seriesId} />
