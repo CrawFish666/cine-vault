@@ -40,7 +40,6 @@ export function TrendingNow() {
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		scrollProgress,
 		scrollPrev,
 		scrollNext,
 		emblaApi } = useCarouselController({
@@ -156,7 +155,7 @@ export function TrendingNow() {
 				)}
 
 
-			{isMobile && <CarouselProgress scrollProgress={scrollProgress} />}
+			{isMobile && <CarouselProgress emblaApi={emblaApi} />}
 		</section>
 	)
 }

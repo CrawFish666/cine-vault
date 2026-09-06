@@ -28,9 +28,9 @@ export function Upcoming() {
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		scrollProgress,
 		scrollPrev,
 		scrollNext,
+		emblaApi
 	} = useCarouselController({
 		align: "start",
 		dragFree: false,
@@ -94,9 +94,7 @@ export function Upcoming() {
 				)
 			}
 
-			{isMobile && (
-				<CarouselProgress scrollProgress={scrollProgress} />
-			)}
+			{isMobile && <CarouselProgress emblaApi={emblaApi} />}
 		</section>
 	)
 }

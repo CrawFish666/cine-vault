@@ -26,7 +26,6 @@ export function TrendingPeople() {
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		scrollProgress,
 		scrollPrev,
 		scrollNext,
 		emblaApi
@@ -98,7 +97,7 @@ export function TrendingPeople() {
 						)
 					})}
 				</Carousel>)}
-			{isMobile && <CarouselProgress scrollProgress={scrollProgress} />}
+			{isMobile && <CarouselProgress emblaApi={emblaApi} />}
 		</section>
 	)
 }

@@ -36,7 +36,6 @@ export function OnTheAirTvShows() {
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		scrollProgress,
 		scrollPrev,
 		scrollNext,
 		emblaApi
@@ -127,7 +126,7 @@ export function OnTheAirTvShows() {
 						})}
 					</Carousel>
 				)}
-			{isMobile && <CarouselProgress scrollProgress={scrollProgress} />}
+			{isMobile && <CarouselProgress emblaApi={emblaApi} />}
 		</section>
 	)
 }

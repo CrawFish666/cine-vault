@@ -22,7 +22,7 @@ export function WatchlistMovies() {
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		scrollProgress,
+		emblaApi,
 		scrollPrev,
 		scrollNext,
 	} = useCarouselController({
@@ -60,7 +60,7 @@ export function WatchlistMovies() {
 							<CarouselCard to={ROUTES.MOVIE_DETAILS_BY_ID(item.id)} className="flex flex-col p-2.5 lg:p-4 2xl:p-5 h-[clamp(303px,calc(9.62vw+263.5px),404px)] laptop:h-[clamp(404px,calc(20vw+114px),500px)]">
 
 								<div className="relative min-h-0 flex-1 overflow-hidden mb-3 lg:mb-4 2xl:mb-5">
-									
+
 									<img className="object-cover rounded-[10px] w-full h-full" src={`https://image.tmdb.org/t/p/w500${item.posterPath}`} />
 								</div>
 
@@ -83,7 +83,7 @@ export function WatchlistMovies() {
 					)
 				})}
 			</Carousel>
-			{isMobile && <CarouselProgress scrollProgress={scrollProgress} />}
+			{isMobile && <CarouselProgress emblaApi={emblaApi} />}
 		</section>
 	)
 }

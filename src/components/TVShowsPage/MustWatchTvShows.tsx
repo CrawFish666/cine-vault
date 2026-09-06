@@ -36,7 +36,6 @@ export function MustWatchTvShows() {
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		scrollProgress,
 		scrollPrev,
 		scrollNext,
 		emblaApi
@@ -126,7 +125,7 @@ export function MustWatchTvShows() {
 						})}
 					</Carousel>
 				)}
-			{isMobile && <CarouselProgress scrollProgress={scrollProgress} />}
+			{isMobile && <CarouselProgress emblaApi={emblaApi} />}
 		</section>
 	)
 }

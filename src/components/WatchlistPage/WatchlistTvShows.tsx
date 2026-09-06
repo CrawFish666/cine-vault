@@ -22,7 +22,7 @@ export function WatchlistTvShows() {
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		scrollProgress,
+		emblaApi,
 		scrollPrev,
 		scrollNext,
 	} = useCarouselController({
@@ -85,7 +85,7 @@ export function WatchlistTvShows() {
 					)
 				})}
 			</Carousel>
-			{isMobile && <CarouselProgress scrollProgress={scrollProgress} />}
+			{isMobile && <CarouselProgress emblaApi={emblaApi} />}
 		</section>
 	)
 }

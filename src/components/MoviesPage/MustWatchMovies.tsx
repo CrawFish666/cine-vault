@@ -37,7 +37,6 @@ export function MustWatchMovies() {
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		scrollProgress,
 		scrollPrev,
 		scrollNext,
 		emblaApi
@@ -124,7 +123,7 @@ export function MustWatchMovies() {
 				</Carousel>
 			)}
 
-			{isMobile && <CarouselProgress scrollProgress={scrollProgress} />}
+			{isMobile && <CarouselProgress emblaApi={emblaApi} />}
 		</section>
 	)
 }

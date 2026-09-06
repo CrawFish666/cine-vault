@@ -36,7 +36,6 @@ export function AiringTodayTvShows() {
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		scrollProgress,
 		scrollPrev,
 		scrollNext,
 		emblaApi
@@ -124,7 +123,7 @@ export function AiringTodayTvShows() {
 						)
 					})}
 				</Carousel>)}
-			{isMobile && <CarouselProgress scrollProgress={scrollProgress} />}
+			{isMobile && <CarouselProgress emblaApi={emblaApi} />}
 		</section>
 	)
 }

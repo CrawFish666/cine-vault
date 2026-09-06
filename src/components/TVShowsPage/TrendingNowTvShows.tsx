@@ -44,7 +44,6 @@ export function TrendingNowTvShows() {
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		scrollProgress,
 		scrollPrev,
 		scrollNext,
 		emblaApi } = useCarouselController({
@@ -160,7 +159,7 @@ export function TrendingNowTvShows() {
 					</Carousel>
 				)}
 
-			{isMobile && <CarouselProgress scrollProgress={scrollProgress} />}
+			{isMobile && <CarouselProgress emblaApi={emblaApi} />}
 		</section>
 	)
 }

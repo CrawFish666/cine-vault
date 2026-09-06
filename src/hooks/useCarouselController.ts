@@ -30,25 +30,25 @@ export function useCarouselController(mainOptions: EmblaOptionsType) {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
-	const [scrollProgress, setScrollProgress] = useState(0);
+	// const [scrollProgress, setScrollProgress] = useState(0);
 
 	const toggleButtonsDisabled = (api: EmblaCarouselType) => {
 		setPrevButtonDisabled(!api.canScrollPrev());
 		setNextButtonDisabled(!api.canScrollNext());
 	};
 
-	const onScroll = useCallback((api: EmblaCarouselType) => {
-		if (!isMobile) return;
-		const progress = Math.max(0, Math.min(1, api.scrollProgress()))
-		setScrollProgress(progress * 100)
-	}, [isMobile])
+	// const onScroll = useCallback((api: EmblaCarouselType) => {
+	// 	if (!isMobile) return;
+	// 	const progress = Math.max(0, Math.min(1, api.scrollProgress()))
+	// 	setScrollProgress(progress * 100)
+	// }, [isMobile])
 
 	useEffect(() => {
 		if (!emblaApi) return;
 
 		setScrollSnaps(emblaApi.scrollSnapList());
 		toggleButtonsDisabled(emblaApi);
-		onScroll(emblaApi);
+		// onScroll(emblaApi);
 
 		const onSelect = () => {
 			const newIndex = emblaApi.selectedScrollSnap();
@@ -64,18 +64,19 @@ export function useCarouselController(mainOptions: EmblaOptionsType) {
 
 		emblaApi.on("select", onSelect);
 		emblaApi.on("reInit", onReInit);
-		emblaApi.on("scroll", onScroll);
-		emblaApi.on("reInit", onScroll);
-		emblaApi.on("slideFocus", onScroll);
+		// emblaApi.on("scroll", onScroll);
+		
+		// emblaApi.on("reInit", onScroll);
+		// emblaApi.on("slideFocus", onScroll);
 
 		return () => {
 			emblaApi.off("select", onSelect);
 			emblaApi.off("reInit", onReInit);
-			emblaApi.off("scroll", onScroll);
-			emblaApi.off("reInit", onScroll);
-			emblaApi.off("slideFocus", onScroll);
+			// emblaApi.off("scroll", onScroll);
+			// emblaApi.off("reInit", onScroll);
+			// emblaApi.off("slideFocus", onScroll);
 		};
-	}, [emblaApi, emblaDotsApi, onScroll]);
+	}, [emblaApi, emblaDotsApi, ]);
 
 
 	const scrollPrev = () => emblaApi?.scrollPrev()
@@ -89,7 +90,7 @@ export function useCarouselController(mainOptions: EmblaOptionsType) {
 		nextButtonDisabled,
 		selectedIndex,
 		scrollSnaps,
-		scrollProgress,
+		// scrollProgress,
 		scrollPrev,
 		scrollNext,
 		emblaApi
