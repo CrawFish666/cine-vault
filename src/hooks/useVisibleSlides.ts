@@ -11,14 +11,18 @@ export function useVisibleSlides(emblaApi: EmblaCarouselType | undefined) {
 
 		const updateVisibleSlide = () => {
 			const slideInView = emblaApi.slidesInView();
-			// console.log("VISIBLE:", slideInView);
-
 			setVisibleSlide((prev) => {
 				const next = new Set(prev);
-				slideInView.forEach((index) => next.add(index));
-				return next;
-			})
-		}
+				let changed = false;
+				slideInView.forEach((index) => {
+					if (!next.has(index)) {
+						next.add(index);
+						changed = true;
+					}
+				});
+				return changed ? next : prev;
+			});
+		};
 
 		updateVisibleSlide();
 
