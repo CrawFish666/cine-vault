@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import type { EmblaCarouselType } from "embla-carousel";
 
 type CarouselProgressProps = {
@@ -6,7 +6,7 @@ type CarouselProgressProps = {
 	className?: string;
 };
 
-export function CarouselProgress({
+function CarouselProgressImpl({
 	emblaApi,
 	className = ""
 }: CarouselProgressProps) {
@@ -41,12 +41,16 @@ export function CarouselProgress({
 	}, [emblaApi]);
 
 	return (
-		<div className={`h-1 w-20 mx-auto mt-4 overflow-hidden bg-surface-20 rounded-full ${className}`}>
+		<div
+			style={{ willChange: "transform" }}
+			className={`h-1 w-20 mx-auto mt-4 overflow-hidden bg-surface-20 rounded-full ${className}`}>
 			<div
 				ref={barRef}
-				className="h-full bg-primary-45 rounded-full origin-left"
+				className="w-full h-full bg-primary-45 rounded-full origin-left"
 				style={{ transform: "scaleX(0)" }}
 			/>
 		</div>
 	);
 }
+
+export const CarouselProgress = memo(CarouselProgressImpl);
