@@ -1,8 +1,8 @@
-import { AiringTodayTvShows } from "../components/TVShowsPage/AiringTodayTvShows";
-import { MustWatchTvShows } from "../components/TVShowsPage/MustWatchTvShows";
-import { OnTheAirTvShows } from "../components/TVShowsPage/OnTheAirTvShows";
-import { OurGenresTvShowsList } from "../components/TVShowsPage/OurGenresTvShowsList";
-import { TrendingNowTvShows } from "../components/TVShowsPage/TrendingNowTvShows";
+import { AiringTodayTvShows } from "../components/tvshows/AiringTodayTvShows";
+import { MustWatchTvShows } from "../components/tvshows/MustWatchTvShows";
+import { OnTheAirTvShows } from "../components/tvshows/OnTheAirTvShows";
+import { OurGenresTvShowsList } from "../components/tvshows/OurGenresTvShowsList";
+import { TrendingNowTvShows } from "../components/tvshows/TrendingNowTvShows";
 
 
 export function TVSHows() {

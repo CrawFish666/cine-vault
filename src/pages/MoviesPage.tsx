@@ -1,8 +1,8 @@
-import { NowPlayingCarousel } from "../components/MoviesPage/NowPlayingCarousel";
-import { Upcoming } from "../components/MoviesPage/Upcoming";
-import { MustWatchMovies } from "../components/MoviesPage/MustWatchMovies";
-import { GenresMovieList } from "../components/MoviesPage/GenresMovieList";
-import { TrendingNow } from "../components/MoviesPage/TrendingNow";
+import { NowPlayingCarousel } from "../components/movies/NowPlayingCarousel";
+import { Upcoming } from "../components/movies/Upcoming";
+import { MustWatchMovies } from "../components/movies/MustWatchMovies";
+import { GenresMovieList } from "../components/movies/GenresMovieList";
+import { TrendingNow } from "../components/movies/TrendingNow";
 
 export function MoviesPage() {
 

@@ -1,5 +1,5 @@
-import { WatchlistMovies } from "../components/WatchlistPage/WatchlistMovies"
-import { WatchlistTvShows } from "../components/WatchlistPage/WatchlistTvShows"
+import { WatchlistMovies } from "../components/watchlist/WatchlistMovies"
+import { WatchlistTvShows } from "../components/watchlist/WatchlistTvShows"
 
 
 export function WatchlistPage() {

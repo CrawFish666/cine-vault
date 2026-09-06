@@ -1,5 +1,5 @@
-import { PopularPeople } from "../components/People/PopularPeople";
-import { TrendingPeople } from "../components/People/TrendingPeople";
+import { PopularPeople } from "../components/people/PopularPeople";
+import { TrendingPeople } from "../components/people/TrendingPeople";
 
 export function PeoplePage() {
 	return (

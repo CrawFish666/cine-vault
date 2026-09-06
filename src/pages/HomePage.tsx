@@ -1,7 +1,7 @@
-import { MustWatchMovies } from "../components/MoviesPage/MustWatchMovies";
-import { TrendingNow } from "../components/MoviesPage/TrendingNow";
-import { MustWatchTvShows } from "../components/TVShowsPage/MustWatchTvShows";
-import { TrendingNowTvShows } from "../components/TVShowsPage/TrendingNowTvShows";
+import { MustWatchMovies } from "../components/movies/MustWatchMovies";
+import { TrendingNow } from "../components/movies/TrendingNow";
+import { MustWatchTvShows } from "../components/tvshows/MustWatchTvShows";
+import { TrendingNowTvShows } from "../components/tvshows/TrendingNowTvShows";
 
 export function HomePage() {
 	return (
