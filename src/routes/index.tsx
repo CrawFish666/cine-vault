@@ -5,7 +5,7 @@ import { MoviesPage } from "../pages/MoviesPage";
 import { HomePage } from "../pages/HomePage";
 import { TVSHows } from "../pages/TVShowsPage";
 import { PeoplePage } from "../pages/PeoplePage";
-import { WatchListPage } from "../pages/WatchListPage";
+import { WatchlistPage } from "../pages/WatchlistPage";
 import { SearchPage } from "../pages/SearchPage";
 import { MovieDetailsPage } from "../pages/MovieDetailsPage";
 import { TvShowDetailsPage } from "../pages/TvShowDetailsPage";
@@ -24,7 +24,7 @@ export function AppRoutes() {
 				<Route path={ROUTES.TV_SHOWS_DETAILS} element={<TvShowDetailsPage />} />
 
 				<Route path={ROUTES.PEOPLE} element={<PeoplePage />} />
-				<Route path={ROUTES.WATCHLIST} element={<WatchListPage />} />
+				<Route path={ROUTES.WATCHLIST} element={<WatchlistPage />} />
 				<Route path={ROUTES.SEARCH} element={<SearchPage />} />
 			</Route>
 		</Routes>

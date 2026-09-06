@@ -2,7 +2,7 @@ import { WatchlistMovies } from "../components/WatchlistPage/WatchlistMovies"
 import { WatchlistTvShows } from "../components/WatchlistPage/WatchlistTvShows"
 
 
-export function WatchListPage() {
+export function WatchlistPage() {
 	return (
 
 		<div className="py-8 flex flex-col gap-[80px] laptop:gap-[100px] desktop:gap-[180px]">
