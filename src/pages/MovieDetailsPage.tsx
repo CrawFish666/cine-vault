@@ -11,6 +11,7 @@ import { PersonInfo } from "../components/details/PersonInfo";
 import { CastSection } from "../components/details/CastSection";
 import { ReviewsSection } from "../components/details/ReviewsSection";
 import { useMediaReviews } from "../hooks/useMediaReviews";
+import { MovieDetailsPageSkeleton } from "../components/skeleton/MovieDetailsPageSkeleton";
 
 export function MovieDetailsPage() {
 	const { id } = useParams();
@@ -24,7 +25,7 @@ export function MovieDetailsPage() {
 
 
 	if (isLoading) {
-		return <div>Загрузка...</div>;
+		return <MovieDetailsPageSkeleton mediaId={movieId}/>
 	}
 
 	if (isError || !data) {

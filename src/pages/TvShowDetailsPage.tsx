@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useMovieDetails } from "../hooks/useMovieDetails"
-import { ArrowLeft, ArrowRight, Calendar, List, Play, Share2, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, ImageOff, List, Play, Share2, Star } from "lucide-react";
 import { Carousel } from "../components/carousel/Carousel";
 import { useCarouselController } from "../hooks/useCarouselController";
 import { CarouselSlide } from "../components/carousel/CarouselSlide";
@@ -17,9 +17,17 @@ import { GenresInfo } from "../components/details/GenresInfo";
 import { PersonInfo } from "../components/details/PersonInfo";
 import { CastSection } from "../components/details/CastSection";
 import { ReviewsSection } from "../components/details/ReviewsSection";
-import { useMediaReviews } from "../hooks/useMediaReviews";
 import { useTvShowDetails } from "../hooks/TVShows/useTvShowDetails";
 import { SeasonsEpisodsSection } from "../components/details/SeasonsEpisodsSection";
+import { HeroBannerSkeleton } from "../components/skeleton/details/HeroBannerSkeleton";
+import { DescriptionSectionSkeleton } from "../components/skeleton/details/DescriptionSectionSkeleton";
+import { ReleaseDateInfoSkeleton } from "../components/skeleton/details/ReleaseDateInfoSkeleton";
+import { RatingInfoSkeleton } from "../components/skeleton/details/RatingInfoSkeleton";
+import { GenresInfoSkeleton } from "../components/skeleton/details/GenresInfoSkeleton";
+import { PersonInfoSkeleton } from "../components/skeleton/details/PersonInfoSkeleton";
+import { CastSectionSkeleton } from "../components/skeleton/details/CastSectionSketelon";
+import { SeasonsEpisodsSectionSkeleton } from "../components/skeleton/details/SeasonsEpisodsSectionSkeleton";
+import { TvShowDetailsPageSkeleton } from "../components/skeleton/TvShowDetailsPageSkeleton";
 
 export function TvShowDetailsPage() {
 	const { id } = useParams();
@@ -27,24 +35,21 @@ export function TvShowDetailsPage() {
 
 	const [isTrailerOpen, setIsTrailerOpen] = useState(false);
 
-	const { data, isLoading, isError } = useTvShowDetails(tvShowId);
+	const { data, isLoading, isError, isPending } = useTvShowDetails(tvShowId);
 
 	// Сделать адаптив как в MovieDetails!! И проверить сколько прокрутов карусели т.к. много брейкпоинтов
 
-	console.log(data)
 
 	if (isLoading) {
-		return <div>Загрузка...</div>;
+		return (
+
+			<TvShowDetailsPageSkeleton mediaId={tvShowId}/>
+		);
 	}
 
 	if (isError || !data) {
 		return <div>Не удалось загрузить фильм</div>;
 	}
-
-
-
-
-	console.log(data)
 
 	const director = data.created_by[0]
 
@@ -106,9 +111,8 @@ export function TvShowDetailsPage() {
 				</div>
 
 				<div className="order-2 lg:order-none lg:col-start-1 lg:row-start-1">
-					<SeasonsEpisodsSection seasons={data.seasons} seriesId={data.id}/>
-					
-					
+					<SeasonsEpisodsSection seasons={data.seasons} seriesId={data.id} />
+
 				</div>
 
 				<aside className="order-3 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-3 self-start bg-surface-10 border border-surface-15 rounded-xl p-[24px] min-[390px]:p-[clamp(24px,calc(0.5714vw_+_21.7714px),30px)] laptop:p-[clamp(30px,calc(2.0833vw),40px)] flex flex-col gap-7.5 lg:sticky lg:top-0">
@@ -126,6 +130,8 @@ export function TvShowDetailsPage() {
 				<div className="order-5 lg:order-none lg:col-start-1 lg:row-start-4">
 					<ReviewsSection id={tvShowId} mediaType="tv" />
 				</div>
+				
+				
 
 			</div>
 			{isTrailerOpen && (

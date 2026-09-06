@@ -8,6 +8,7 @@ interface WatchlistButtonProps {
 	variant?: "default" | "overlay";
 }
 
+
 const buttonVariants = {
 	default: "",
 	overlay: "flex items-center justify-center p-1.5 rounded-full bg-black/40 backdrop-blur-sm hover:bg-black/60 transition-colors",

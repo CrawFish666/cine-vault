@@ -1,5 +1,8 @@
 import { HeroActionButtons } from "./HeroActionButtons";
 import type { WatchListItemInput } from "../../../store/watchlistStore";
+import { getBackdropUrl } from "../../../utils/tmdbImage";
+import { handleImageError } from "../../../utils/handleImageError";
+import { TmdbImage } from "../../ui/TmdbImage";
 
 interface HeroBannerProps {
 	title: string;
@@ -23,10 +26,22 @@ export function HeroBanner({
 	onShareClick,
 }: HeroBannerProps) {
 	return (
-		<section className="relative flex-[0_0_100%] min-w-0 min-h-[420px] max-h-[835px] overflow-hidden">
-			<img className="w-full h-full object-cover border border-surface-15 rounded-xl min-h-[420px] max-h-[835px] "
-				src={`https://image.tmdb.org/t/p/original${backdropPath}`}
+		<section className="relative flex-[0_0_100%]  aspect-video min-w-0 min-h-[420px] max-h-[835px] overflow-hidden">
+			{/* <img className="w-full h-full object-cover border border-surface-15 rounded-xl min-h-[420px] max-h-[835px] "
+				src={getBackdropUrl(backdropPath, "w1280")}
+				onError={handleImageError}
 				alt={title}
+				loading="eager"
+				fetchPriority="high"
+				decoding="async"
+			/> */}
+			<TmdbImage
+				src={getBackdropUrl(backdropPath, "w1280")}
+				alt={title}
+				loading="eager"
+				fetchPriority="high"
+				decoding="async"
+				className="w-full h-full min-h-[420px] max-h-[835px] rounded-xl border border-surface-15"
 			/>
 
 			<div className="absolute inset-0 bg-gradient-to-t from-surface-08 to-transparent" />

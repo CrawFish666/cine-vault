@@ -7,10 +7,15 @@ import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselSlide } from "../carousel/CarouselSlide";
 import { useInfiniteScrollTrigger } from "../../hooks/useInfiniteScrollTrigger";
 import { useTrendingPeople } from "../../hooks/People/useTrendingPeople";
+import { TmdbImage } from "../ui/TmdbImage";
+import { getProfileUrl } from "../../utils/tmdbImage";
+import { sectionLinks } from "../Footer/sectionLinks";
+import { ROUTES } from "../../routes/pathConstants";
+import { CarouselSkeleton } from "../skeleton/CarouselSkeleton";
 
 export function TrendingPeople() {
 
-	const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useTrendingPeople();
+	const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useTrendingPeople();
 
 	const allData = data?.pages.flatMap((item) => item.results) ?? [];
 
@@ -50,10 +55,10 @@ export function TrendingPeople() {
 
 
 	return (
-		<section className="">
+		<section className="" id={sectionLinks[ROUTES.PEOPLE][1].id}>
 			<CarouselHeader
 				title="В тренде"
-				showControls={true}
+				showControls={!isLoading}
 				emblaDotsRef={emblaDotsRef}
 				prevButtonDisabled={prevButtonDisabled}
 				nextButtonDisabled={nextButtonDisabled}
@@ -61,28 +66,39 @@ export function TrendingPeople() {
 				selectedIndex={selectedIndex}
 				scrollPrev={scrollPrev}
 				scrollNext={scrollNext} />
-			<Carousel emblaRef={emblaRef} className="gap-4 lg:gap-5">
-				{allData.map((item, index) => {
-					console.log(item)
-					return (
-						<CarouselSlide key={item.id} className="basis-[181px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] lg:basis-[calc((100%-80px)/5)]">
-							<CarouselCard className="flex flex-col p-3 h-[clamp(259px,calc(4.667vw+240.8px),308px)] laptop:h-[clamp(308px,calc(14.375vw+101px),377px)]">
+			{isLoading ?
+				(<CarouselSkeleton
+					count={5}
+					slideClassName="basis-[181px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] lg:basis-[calc((100%-80px)/5)] h-[clamp(259px,calc(4.667vw+240.8px),308px)] laptop:h-[clamp(308px,calc(14.375vw+101px),377px)]"
+					gapClassName="gap-4 lg:gap-5" />)
+				:
+				(<Carousel emblaRef={emblaRef} className="gap-4 lg:gap-5">
+					{allData.map((item, index) => {
+						console.log(item)
+						return (
+							<CarouselSlide key={item.id} className="basis-[181px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] lg:basis-[calc((100%-80px)/5)]">
+								<CarouselCard className="flex flex-col p-3 h-[clamp(259px,calc(4.667vw+240.8px),308px)] laptop:h-[clamp(308px,calc(14.375vw+101px),377px)]">
 
-								<div className="relative min-h-0 flex-1 overflow-hidden mb-3 lg:mb-4 2xl:mb-5">
-									<img className="object-cover rounded-[10px] w-full h-full" src={`https://image.tmdb.org/t/p/w500${item.profile_path}`} />
-								</div>
+									<div className="relative min-h-0 flex-1 overflow-hidden mb-3 lg:mb-4 2xl:mb-5">
+										<TmdbImage key={item.id} className="w-full h-full rounded-[10px]"
+											alt={item.name}
+											loading="lazy"
+											decoding="async"
+											src={getProfileUrl(item.profile_path, "w185")}
+										/>
+									</div>
 
-								<div className=" shrink-0">
+									<div className=" shrink-0">
 
-									<div className="text-white font-medium text-base text-center">{item.name}</div>
+										<div className="text-white font-medium text-base text-center">{item.name}</div>
 
 
-								</div>
-							</CarouselCard>
-						</CarouselSlide>
-					)
-				})}
-			</Carousel>
+									</div>
+								</CarouselCard>
+							</CarouselSlide>
+						)
+					})}
+				</Carousel>)}
 			{isMobile && <CarouselProgress scrollProgress={scrollProgress} />}
 		</section>
 	)

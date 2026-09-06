@@ -1,4 +1,6 @@
 import type { CrewMember, TVShowAggregateCrewMember, TVShowCreatedBy } from "../../types/tmdb";
+import { getProfileUrl } from "../../utils/tmdbImage";
+import { TmdbImage } from "../ui/TmdbImage";
 
 interface PersonInfoProps {
 	title: string;
@@ -17,11 +19,13 @@ export function PersonInfo({
 
 			<div className="bg-surface-08 border border-surface-15 rounded-lg p-3.5 inline-flex gap-2.5 items-center">
 				<div className="w-14 h-14 shrink-0">
-					<img
-						className="w-full h-full object-cover rounded-lg"
-						src={`https://image.tmdb.org/t/p/original${person.profile_path}`}
+					<TmdbImage className="rounded-lg w-full h-full"
 						alt={person.name}
+						loading="lazy"
+						decoding="async"
+						src={getProfileUrl(person.profile_path, "w185")}
 					/>
+
 				</div>
 
 				<div className="flex flex-col gap-1 min-w-0">
@@ -33,6 +37,7 @@ export function PersonInfo({
 						Сделать запрос person details и узнать где родился
 					</p>
 				</div>
+
 			</div>
 		</div>
 	);
