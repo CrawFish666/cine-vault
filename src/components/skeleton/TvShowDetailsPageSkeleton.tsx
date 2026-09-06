@@ -1,5 +1,5 @@
 import { ReviewsSection } from "../details/ReviewsSection";
-import { CastSectionSkeleton } from "./details/CastSectionSketelon";
+import { CastSectionSkeleton } from "./details/CastSectionSkeleton";
 import { DescriptionSectionSkeleton } from "./details/DescriptionSectionSkeleton";
 import { GenresInfoSkeleton } from "./details/GenresInfoSkeleton";
 import { HeroBannerSkeleton } from "./details/HeroBannerSkeleton";

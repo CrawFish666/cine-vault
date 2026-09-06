@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { searchApi } from "../../api/seacrh";
+import { searchApi } from "../../api/search";
 
 export function useSearchTVShows(query: string) {
 	return useInfiniteQuery({
