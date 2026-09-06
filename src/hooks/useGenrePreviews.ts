@@ -11,7 +11,7 @@ export function useGenrePreviews(genres: Genre[], visibleIndexes: Set<number>) {
 			queryFn: () => moviesApi.genrePreview(genre.id),
 			enabled: visibleIndexes.has(index),
 			staleTime: 1000 * 60 * 60 * 12,
-			select: (data: Paginated<Movie>) => data.results.filter((movie) => movie.poster_path !== null).slice(0, 4).map((movie) => movie.poster_path)
+			select: (data: Paginated<Movie>) => data.results.filter((movie) => movie.poster_path !== null).slice(0, 4)
 		}))
 	})
 }
