@@ -1,10 +1,19 @@
 ## TODO
 
 ### Pages
+- [x] Home
+- [x] Movies
+- [x] TV Shows
+- [x] People
+- [x] Search
+- [x] Watchlist
 - [x] Movie Details
+- [x] Movies by Genre
 - [x] TV Show Details
+- [x] TV Shows by Genre
 - [ ] Person details
-- [x] HomePage like TMDB with trending day/week movies, latest trailers popular/streaming/ontv/etc, free to watch or What's popular
+
+
 
 ### Search
 
@@ -13,7 +22,7 @@
 - [x] Реализовать sticky-поведение SearchPanel
 - [x] Скрывать Header при прокрутке вниз, при scroll back отображать
 - [x] Показывать SearchPanel при прокрутке вниз, если он был открыт
-- [ ] Добавить постраничную пагинацию результатов поиска
+- [x] Добавить infinity loading для результатов поиска
 - [x] Продумать UX поиска на мобильных устройствах
 - [x] Продумать поиск через бургер-меню
 
@@ -22,7 +31,7 @@
 - [x] Доработать страницу Watchlist
 - [ ] Показывать сообщение, если фильмы отсутствуют
 - [ ] Показывать сообщение, если сериалы отсутствуют
-- [ ] Получать данные из Zustand store
+- [x] Получать данные из Zustand store
 - [ ] Обновлять данные Watchlist в фоне
 
 ### Footer
@@ -39,7 +48,7 @@
 - [ ] Оптимизировать рендеринг каруселей
 - [ ] Реализовать виртуализацию слайдов
 - [ ] Ограничить количество одновременно отрисовываемых слайдов
-- [ ] Проверить производительность приложения
+- [x] Проверить производительность приложения
 
 ### UX
 
