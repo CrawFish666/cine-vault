@@ -18,7 +18,6 @@ const ACCORDION_ANIMATION_DURATION = 250;
 export function SeasonAccordion({ season, seriesId }: SeasonAccordionProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const { data, isLoading, isError } = useTVSeasonDetails({ seriesId, seasonNumber: season.season_number, enabled: isOpen });
-	console.log(season)
 
 	const accordionRef = useRef<HTMLDivElement>(null);
 	const handleToggle = () => {

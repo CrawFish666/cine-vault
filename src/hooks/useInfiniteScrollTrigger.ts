@@ -32,8 +32,7 @@ export function useInfiniteScrollTrigger({
 			const totalData = emblaApi.slideNodes().length;
 
 			const threshold = totalData - visibleCount * screensAhead - 1;
-
-			console.log("lastVisibleIndex:", lastVisibleIndex, "threshold:", threshold);
+			
 			if (lastVisibleIndex >= threshold) {
 				fetchNextPage();
 			}

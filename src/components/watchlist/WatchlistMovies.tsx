@@ -54,7 +54,6 @@ export function WatchlistMovies() {
 				scrollNext={scrollNext} />
 			<Carousel emblaRef={emblaRef} className="gap-4 lg:gap-5">
 				{data.map((item) => {
-					console.log(item)
 					return (
 						<CarouselSlide key={item.id} className="relative basis-[231px] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] lg:basis-[calc((100%-40px)/3)] xl:basis-[calc((100%-60px)/4)]">
 							<CarouselCard to={ROUTES.MOVIE_DETAILS_BY_ID(item.id)} className="flex flex-col p-2.5 lg:p-4 2xl:p-5 h-[clamp(303px,calc(9.62vw+263.5px),404px)] laptop:h-[clamp(404px,calc(20vw+114px),500px)]">

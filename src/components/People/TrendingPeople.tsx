@@ -72,7 +72,6 @@ export function TrendingPeople() {
 				:
 				(<Carousel emblaRef={emblaRef} className="gap-4 lg:gap-5">
 					{allData.map((item) => {
-						console.log(item)
 						return (
 							<CarouselSlide key={item.id} className="basis-[181px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] lg:basis-[calc((100%-80px)/5)]">
 								<CarouselCard className="flex flex-col p-3 h-[clamp(259px,calc(4.667vw+240.8px),308px)] laptop:h-[clamp(308px,calc(14.375vw+101px),377px)]">

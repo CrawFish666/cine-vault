@@ -26,7 +26,6 @@ export function TrendingNowTvShows() {
 	const [timeWindow, setTimeWindow] = useState<TimeWindowParam["time_window"]>("day");
 
 	const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-	console.log(timeZone); // Выведет текущую временную зону
 
 	const { data,
 		fetchNextPage,
