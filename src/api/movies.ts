@@ -41,6 +41,12 @@ export interface MovieReviewsParams {
 	page?: number;
 }
 
+export interface MoviesByGenreParams {
+	genreId: number;
+	page?: number;
+	language?: string
+}
+
 // MovieListParams = {} сделан для того, чтобы можно было вообще ничего не передавать в функцию при вызове.
 // Т.е. передасться пустой объект {} для деструктуризации.
 // Без этого если ничего не передать, то будет попытка деструктуризировать undefined
@@ -70,7 +76,7 @@ export const moviesApi = {
 		tmdbClient.
 			get<MovieRuntime>(`/movie/${id}`, { params: { language } })
 			.then(res => res.data),
-	genresMovieList: ({ language = "RU" }: GenresMovieListParams = {}) =>
+	genresMovieList: ({ language = "ru" }: GenresMovieListParams = {}) =>
 		tmdbClient
 			.get<GenresListResponse>("/genre/movie/list", { params: { language } })
 			.then(resp => resp.data.genres),
@@ -91,6 +97,11 @@ export const moviesApi = {
 				}
 			})
 			.then(res => res.data),
-
+	byGenre: ({ genreId, page = 1, language = "ru-RU" }: MoviesByGenreParams) =>
+		tmdbClient
+			.get<Paginated<Movie>>("/discover/movie", {
+				params: { with_genres: genreId, sort_by: "popularity.desc", page, language }
+			})
+			.then(res => res.data),
 			
 }
