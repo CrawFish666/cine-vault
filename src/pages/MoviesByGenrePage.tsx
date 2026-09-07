@@ -8,6 +8,7 @@ import { useInfiniteScrollObserver } from "../hooks/useInfiniteScrollObserver";
 import { MovieGridCard } from "../components/movies/MovieGridCard";
 import { ROUTES } from "../routes/pathConstants";
 import { uniqueById } from "../utils/array";
+import { MovieGridCardSkeleton } from "../components/skeleton/MovieGridCardSkeleton";
 
 export function MoviesByGenrePage() {
 	const { id } = useParams();
@@ -52,9 +53,12 @@ export function MoviesByGenrePage() {
 			</h1>
 
 			{isLoading && (
-				<div className="flex justify-center py-16">
-					<Loader2 className="w-6 h-6 text-primary-45 animate-spin" />
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5">
+					{Array.from({ length: 16 }).map((_, index) => (
+						<MovieGridCardSkeleton key={index} />
+					))}
 				</div>
+
 			)}
 
 			{!isLoading && movies.length === 0 && (
@@ -74,8 +78,10 @@ export function MoviesByGenrePage() {
 			<div ref={sentinelRef} className="h-1" />
 
 			{isFetchingNextPage && (
-				<div className="flex justify-center py-6">
-					<Loader2 className="w-6 h-6 text-primary-45 animate-spin" />
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5">
+					{Array.from({ length: 16 }).map((_, index) => (
+						<MovieGridCardSkeleton key={index} />
+					))}
 				</div>
 			)}
 
