@@ -25,7 +25,6 @@ import { sectionLinks } from "../Footer/sectionLinks";
 export function TrendingNowTvShows() {
 	const [timeWindow, setTimeWindow] = useState<TimeWindowParam["time_window"]>("day");
 
-	const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 	const { data,
 		fetchNextPage,
