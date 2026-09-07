@@ -8,6 +8,8 @@ export const ROUTES = {
 	TV_SHOWS: "/tv_shows",
 	TV_SHOWS_DETAILS: "/tv_shows/:id",
 	TV_SHOWS_DETAILS_BY_ID: (id: number | string) => `/tv_shows/${id}`,
+	TV_SHOWS_BY_GENRE: "/tv_shows/by-genre/:id",
+	TV_SHOWS_BY_GENRE_BY_ID: (id: number | string) => `/tv_shows/by-genre/${id}`,
 	PEOPLE: "/people",
 	WATCHLIST: "/watchlist",
 	SEARCH: "/search",
