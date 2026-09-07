@@ -9,6 +9,7 @@ import { SearchPage } from "../pages/SearchPage";
 import { MovieDetailsPage } from "../pages/MovieDetailsPage";
 import { TvShowDetailsPage } from "../pages/TvShowDetailsPage";
 import { WatchlistPage } from "../pages/WatchlistPage";
+import { MoviesByGenrePage } from "../pages/MoviesByGenrePage";
 
 
 export function AppRoutes() {
@@ -19,6 +20,7 @@ export function AppRoutes() {
 
 				<Route path={ROUTES.MOVIES} element={<MoviesPage />} />
 				<Route path={ROUTES.MOVIE_DETAILS} element={<MovieDetailsPage />} />
+				<Route path={ROUTES.MOVIES_BY_GENRE} element={<MoviesByGenrePage />} />
 
 				<Route path={ROUTES.TV_SHOWS} element={<TVSHows />} />
 				<Route path={ROUTES.TV_SHOWS_DETAILS} element={<TvShowDetailsPage />} />
