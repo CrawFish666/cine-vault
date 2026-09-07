@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useSearchMulti } from "../../hooks/Search/useSearchMulti";
 import { SearchResults } from "./SearchResults";
+import { useDebounce } from "../../hooks/useDebounce";
 
 
 // type SearchTab = "movie" | "tv" | "person";
@@ -18,7 +19,8 @@ export function SearchPanel({ onClose, variant = "dropdown" }: SearchPanelProps)
 	const navigate = useNavigate();
 
 	const [query, setQuery] = useState("");
-	const { data, isLoading, isError } = useSearchMulti(query);
+	const debouncedQuery = useDebounce(query, 400);
+	const { data, isLoading, isError } = useSearchMulti(debouncedQuery);
 
 	const results = data?.pages[0]?.results ?? [];
 
