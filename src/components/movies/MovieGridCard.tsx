@@ -23,7 +23,7 @@ function MovieGridCardImpl({ movie, genres }: MovieGridCardProps) {
 			className="animate-[fadeIn_0.3s_ease-out]"
 		>
 			<article className="flex h-full overflow-hidden rounded-xl border border-surface-15 bg-surface-10">
-				<div className="relative w-32 lg:w-40 shrink-0 bg-surface-15 self-start">
+				<div className="relative w-32 lg:w-40 shrink-0 bg-surface-15 self-start aspect-[2/3]">
 					<TmdbImage
 						src={getPosterUrl(movie.poster_path, "w342")}
 						alt={movie.title}
