@@ -33,6 +33,7 @@ export interface OnTheAirTVShowsRequest extends OnTheAirTVShowsParams, PageParam
 export interface DetailsParams extends LanguageParam {
 	append_to_response?: string;
 }
+export interface TvShowsByGenreParams extends PageParam, LanguageParam { genreId: number };
 
 export interface TVSeasonDetailsParams {
 	seriesId: number;
@@ -40,6 +41,7 @@ export interface TVSeasonDetailsParams {
 	language?: string;
 	append_to_response?: string;
 }
+
 
 export const tvshowsApi = {
 	trendingNow: ({ language = "ru-RU", time_window = "day", page = 1 }: TrendingNowTVShowsParams = {}) =>
@@ -103,4 +105,10 @@ export const tvshowsApi = {
 				append_to_response
 			}
 		}).then(res => res.data),
+	byGenre: ({ genreId, page = 1, language = "ru-RU" }: TvShowsByGenreParams) =>
+		tmdbClient
+			.get<Paginated<TVShow>>("/discover/tv", {
+				params: { with_genres: genreId, sort_by: "popularity.desc", page, language }
+			})
+			.then(res => res.data),
 }
