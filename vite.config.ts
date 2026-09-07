@@ -9,6 +9,7 @@ export default defineConfig({
 		svgr(),
 		react(),
 		tailwindcss(),
-		
+
 	],
+	base: "/cine-vault/",
 })
