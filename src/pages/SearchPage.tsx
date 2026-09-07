@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
-
+import { useEffect, useMemo, useState } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { Loader2 } from "lucide-react";
 
 import { useSearchMovies } from "../hooks/Search/useSearchMovies";
 import { useSearchTVShows } from "../hooks/Search/useSearchTVShows";
 import { useSearchPeople } from "../hooks/Search/useSearchPeople";
-import { ROUTES } from "../routes/pathConstants";
+import { useInfiniteScrollObserver } from "../hooks/useInfiniteScrollObserver";
+import { MovieResultCard } from "../components/search/MovieResultCard";
+import { TvResultCard } from "../components/search/TvResultCard";
+import { PersonResultCard } from "../components/search/PersonResultCard";
+import { uniqueById } from "../utils/array";
 
 
 type SearchTab = "movie" | "tv" | "person";
@@ -30,17 +34,44 @@ export function SearchPage() {
 	const {
 		data: movies,
 		isLoading: isMoviesLoading,
+		hasNextPage: hasMoreMovies,
+		isFetchingNextPage: isFetchingMoreMovies,
+		fetchNextPage: fetchMoreMovies,
 	} = useSearchMovies(query);
 
 	const {
 		data: tvShows,
 		isLoading: isTVShowsLoading,
+		hasNextPage: hasMoreTV,
+		isFetchingNextPage: isFetchingMoreTV,
+		fetchNextPage: fetchMoreTV,
 	} = useSearchTVShows(query);
 
 	const {
 		data: people,
 		isLoading: isPeopleLoading,
+		hasNextPage: hasMorePeople,
+		isFetchingNextPage: isFetchingMorePeople,
+		fetchNextPage: fetchMorePeople,
 	} = useSearchPeople(query);
+
+	const movieSentinelRef = useInfiniteScrollObserver({
+		hasNextPage: hasMoreMovies,
+		isFetchingNextPage: isFetchingMoreMovies,
+		fetchNextPage: fetchMoreMovies,
+	});
+
+	const tvSentinelRef = useInfiniteScrollObserver({
+		hasNextPage: hasMoreTV,
+		isFetchingNextPage: isFetchingMoreTV,
+		fetchNextPage: fetchMoreTV,
+	});
+
+	const personSentinelRef = useInfiniteScrollObserver({
+		hasNextPage: hasMorePeople,
+		isFetchingNextPage: isFetchingMorePeople,
+		fetchNextPage: fetchMorePeople,
+	});
 
 	useEffect(() => {
 		if (initialTab) {
@@ -48,14 +79,20 @@ export function SearchPage() {
 		}
 	}, [initialTab]);
 
-	const movieResults =
-		movies?.pages.flatMap((page) => page.results) ?? [];
+	const movieResults = useMemo(
+		() => uniqueById(movies?.pages.flatMap((page) => page.results) ?? []),
+		[movies]
+	);
 
-	const tvResults =
-		tvShows?.pages.flatMap((page) => page.results) ?? [];
+	const tvResults = useMemo(
+		() => uniqueById(tvShows?.pages.flatMap((page) => page.results) ?? []),
+		[tvShows]
+	);
 
-	const personResults =
-		people?.pages.flatMap((page) => page.results) ?? [];
+	const personResults = useMemo(
+		() => uniqueById(people?.pages.flatMap((page) => page.results) ?? []),
+		[people]
+	);
 
 	const counts = {
 		movie: movies?.pages[0]?.total_results ?? 0,
@@ -67,6 +104,11 @@ export function SearchPage() {
 		isMoviesLoading ||
 		isTVShowsLoading ||
 		isPeopleLoading;
+
+	const handleTabChange = (tab: SearchTab) => {
+		setActiveTab(tab);
+		window.scrollTo({ top: 0, });
+	};
 
 	return (
 		<div className="py-8 flex flex-col gap-[80px] laptop:gap-[100px] desktop:gap-[180px]">
@@ -84,7 +126,7 @@ export function SearchPage() {
 						<div className="p-2">
 							<button
 								type="button"
-								onClick={() => setActiveTab("tv")}
+								onClick={() => handleTabChange("tv")}
 								className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-left transition-colors ${activeTab === "tv"
 									? "bg-surface-15 text-white"
 									: "text-gray-300 hover:bg-surface-15"
@@ -99,7 +141,7 @@ export function SearchPage() {
 
 							<button
 								type="button"
-								onClick={() => setActiveTab("movie")}
+								onClick={() => handleTabChange("movie")}
 								className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-left transition-colors ${activeTab === "movie"
 									? "bg-surface-15 text-white"
 									: "text-gray-300 hover:bg-surface-15"
@@ -114,7 +156,7 @@ export function SearchPage() {
 
 							<button
 								type="button"
-								onClick={() => setActiveTab("person")}
+								onClick={() => handleTabChange("person")}
 								className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-left transition-colors ${activeTab === "person"
 									? "bg-surface-15 text-white"
 									: "text-gray-300 hover:bg-surface-15"
@@ -139,135 +181,99 @@ export function SearchPage() {
 					</div>
 
 					{isLoading && (
-						<div className="text-gray-400">
-							Loading...
+						<div className="flex justify-center py-16">
+							<Loader2 className="w-6 h-6 text-primary-45 animate-spin" />
 						</div>
 					)}
 
 					{!isLoading && activeTab === "movie" && (
-						<div className="flex flex-col gap-4">
-							{movieResults.map((movie) => (
-								<Link to={ROUTES.MOVIE_DETAILS_BY_ID(movie.id)} key={movie.id}>
-									<article
-										
-										className="flex overflow-hidden rounded-xl border border-surface-15 bg-surface-10"
-									>
-										<div className="w-[100px] shrink-0 bg-surface-15">
-											{movie.poster_path && (
-												<img
-													src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-													alt={movie.title}
-													className="w-full h-full object-cover"
-												/>
-											)}
-										</div>
+						<>
+							{movieResults.length === 0 ? (
+								<div className="py-16 text-center text-gray-400">
+									Ничего не найдено по запросу «{query}»
+								</div>
+							) : (
+								<div className="flex flex-col gap-4">
+									{movieResults.map((movie) => (
+										<MovieResultCard key={movie.id} movie={movie} />
+									))}
+								</div>
+							)}
 
-										<div className="min-w-0 p-4">
-											<h2 className="font-semibold text-white">
-												{movie.title}
-											</h2>
+							<div ref={movieSentinelRef} className="h-1" />
 
-											{movie.original_title !== movie.title && (
-												<p className="mt-1 text-sm text-gray-400">
-													{movie.original_title}
-												</p>
-											)}
+							{isFetchingMoreMovies && (
+								<div className="flex justify-center py-6">
+									<Loader2 className="w-6 h-6 text-primary-45 animate-spin" />
+								</div>
+							)}
 
-											<p className="mt-2 text-sm text-gray-400">
-												{movie.release_date || "—"}
-											</p>
-
-											<p className="mt-3 text-sm leading-6 text-gray-300 line-clamp-3">
-												{movie.overview || "No overview available."}
-											</p>
-										</div>
-									</article></Link>
-							))}
-						</div>
+							{!hasMoreMovies && movieResults.length > 0 && (
+								<p className="py-6 text-center text-sm text-gray-500">
+									Больше результатов нет
+								</p>
+							)}
+						</>
 					)}
 
 					{!isLoading && activeTab === "tv" && (
-						<div className="flex flex-col gap-4">
-							{tvResults.map((show) => (
-								<Link key={show.id} to={ROUTES.TV_SHOWS_DETAILS_BY_ID(show.id)}>
-									<article
-										
-										className="flex overflow-hidden rounded-xl border border-surface-15 bg-surface-10"
-									>
-										<div className="w-[100px] shrink-0 bg-surface-15">
-											{show.poster_path && (
-												<img
-													src={`https://image.tmdb.org/t/p/w200${show.poster_path}`}
-													alt={show.name}
-													className="w-full h-full object-cover"
-												/>
-											)}
-										</div>
+						<>
+							{tvResults.length === 0 ? (
+								<div className="py-16 text-center text-gray-400">
+									Ничего не найдено по запросу «{query}»
+								</div>
+							) : (
+								<div className="flex flex-col gap-4">
+									{tvResults.map((show) => (
+										<TvResultCard key={show.id} show={show} />
+									))}
+								</div>
+							)}
 
-										<div className="min-w-0 p-4">
-											<h2 className="font-semibold text-white">
-												{show.name}
-											</h2>
+							<div ref={tvSentinelRef} className="h-1" />
 
-											{show.original_name !== show.name && (
-												<p className="mt-1 text-sm text-gray-400">
-													{show.original_name}
-												</p>
-											)}
+							{isFetchingMoreTV && (
+								<div className="flex justify-center py-6">
+									<Loader2 className="w-6 h-6 text-primary-45 animate-spin" />
+								</div>
+							)}
 
-											<p className="mt-2 text-sm text-gray-400">
-												{show.first_air_date || "—"}
-											</p>
-
-											<p className="mt-3 text-sm leading-6 text-gray-300 line-clamp-3">
-												{show.overview || "No overview available."}
-											</p>
-										</div>
-									</article></Link>
-							))}
-						</div>
+							{!hasMoreTV && tvResults.length > 0 && (
+								<p className="py-6 text-center text-sm text-gray-500">
+									Больше результатов нет
+								</p>
+							)}
+						</>
 					)}
 
 					{!isLoading && activeTab === "person" && (
-						<div className="flex flex-col gap-4">
-							{personResults.map((person) => (
-								<article
-									key={person.id}
-									className="flex overflow-hidden rounded-xl border border-surface-15 bg-surface-10"
-								>
-									<div className="w-[100px] shrink-0 bg-surface-15">
-										{person.profile_path && (
-											<img
-												src={`https://image.tmdb.org/t/p/w200${person.profile_path}`}
-												alt={person.name}
-												className="w-full h-full object-cover"
-											/>
-										)}
-									</div>
+						<>
+							{personResults.length === 0 ? (
+								<div className="py-16 text-center text-gray-400">
+									Ничего не найдено по запросу «{query}»
+								</div>
+							) : (
+								<div className="flex flex-col gap-4">
+									{personResults.map((person) => (
+										<PersonResultCard key={person.id} person={person} />
+									))}
+								</div>
+							)}
 
-									<div className="min-w-0 p-4">
-										<h2 className="font-semibold text-white">
-											{person.name}
-										</h2>
+							<div ref={personSentinelRef} className="h-1" />
 
-										<p className="mt-2 text-sm text-gray-400">
-											{person.known_for_department}
-										</p>
+							{isFetchingMorePeople && (
+								<div className="flex justify-center py-6">
+									<Loader2 className="w-6 h-6 text-primary-45 animate-spin" />
+								</div>
+							)}
 
-										<p className="mt-3 text-sm leading-6 text-gray-300">
-											{person.known_for
-												.slice(0, 3)
-												.map((item) =>
-													item.media_type === "movie"
-														? item.title
-														: item.name
-												)
-												.join(", ")}
-										</p>
-									</div>
-								</article>
-							))}
-						</div>
+							{!hasMorePeople && personResults.length > 0 && (
+								<p className="py-6 text-center text-sm text-gray-500">
+									Больше результатов нет
+								</p>
+							)}
+						</>
 					)}
 				</section>
 			</div>
