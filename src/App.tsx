@@ -10,7 +10,7 @@ function App() {
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<BrowserRouter basename="/cine-vault">
+			<BrowserRouter>
 				<AppRoutes />
 			</BrowserRouter>
 			<ReactQueryDevtools initialIsOpen={false} />
