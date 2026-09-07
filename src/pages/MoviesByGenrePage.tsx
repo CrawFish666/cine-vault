@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, Loader2 } from "lucide-react";
-
+import { ArrowLeft } from "lucide-react";
 import { useGenresMovieList } from "../hooks/Movies/useGenresMovieList";
 import { useMoviesByGenre } from "../hooks/Movies/useMoviesByGenre";
 import { useInfiniteScrollObserver } from "../hooks/useInfiniteScrollObserver";
