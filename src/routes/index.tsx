@@ -11,6 +11,7 @@ import { TvShowDetailsPage } from "../pages/TvShowDetailsPage";
 import { WatchlistPage } from "../pages/WatchlistPage";
 import { MoviesByGenrePage } from "../pages/MoviesByGenrePage";
 import { TvShowsByGenrePage } from "../pages/TvShowsByGenrePage";
+import { NotFoundPage } from "../pages/NotFoundPage";
 
 
 export function AppRoutes() {
@@ -30,6 +31,8 @@ export function AppRoutes() {
 				<Route path={ROUTES.PEOPLE} element={<PeoplePage />} />
 				<Route path={ROUTES.WATCHLIST} element={<WatchlistPage />} />
 				<Route path={ROUTES.SEARCH} element={<SearchPage />} />
+
+				<Route path="*" element={<NotFoundPage />} />
 			</Route>
 		</Routes>
 	)
