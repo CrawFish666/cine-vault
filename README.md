@@ -12,6 +12,7 @@
 - [x] TV Show Details
 - [x] TV Shows by Genre
 - [ ] Person details
+- [x] Not Found Page
 
 
 
