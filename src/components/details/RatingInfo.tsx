@@ -1,5 +1,5 @@
 import { Star } from "lucide-react";
-import { StarRaiting } from "../StarRating";
+import { StarRaiting } from "../StarRaiting";
 
 interface RatingInfoProps {
 	voteAverage: number;

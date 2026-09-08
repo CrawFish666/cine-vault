@@ -9,7 +9,7 @@ import { Carousel } from "../carousel/Carousel";
 import { CarouselSlide } from "../carousel/CarouselSlide";
 import { CarouselCard } from "../carousel/CarouselCard";
 import { formatDateTime } from "../../utils/date";
-import { StarRaiting } from "../StarRating";
+import { StarRaiting } from "../StarRaiting";
 import { CarouselControls } from "../carousel/CarouselControls";
 
 
@@ -116,8 +116,8 @@ export function ReviewsSection({ id, mediaType }: ReviewsSectionProps) {
 						<p className="text-xl text-white">
 							Отзывов ещё нет..
 						</p>
-					) }
-			
+					)}
+
 		</section>
 	)
 }

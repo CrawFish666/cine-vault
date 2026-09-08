@@ -5,7 +5,7 @@ import { CarouselCard } from "../carousel/CarouselCard";
 import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselProgress } from "../carousel/CarouselProgress";
 import { CarouselSlide } from "../carousel/CarouselSlide";
-import { StarRaiting } from "../StarRating";
+import { StarRaiting } from "../StarRaiting";
 import { useInfiniteScrollTrigger } from "../../hooks/useInfiniteScrollTrigger";
 import { useVisibleSlides } from "../../hooks/useVisibleSlides";
 import { WatchlistButton } from "../WatchlistButton";

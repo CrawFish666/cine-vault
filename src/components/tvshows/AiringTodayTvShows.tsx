@@ -5,7 +5,7 @@ import { CarouselCard } from "../carousel/CarouselCard";
 import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselProgress } from "../carousel/CarouselProgress";
 import { CarouselSlide } from "../carousel/CarouselSlide";
-import { StarRaiting } from "../StarRating";
+import { StarRaiting } from "../StarRaiting";
 import { useInfiniteScrollTrigger } from "../../hooks/useInfiniteScrollTrigger";
 import { useVisibleSlides } from "../../hooks/useVisibleSlides";
 import { WatchlistButton } from "../WatchlistButton";
@@ -78,10 +78,10 @@ export function AiringTodayTvShows() {
 				scrollPrev={scrollPrev}
 				scrollNext={scrollNext} />
 			{isLoading ?
-				(<CarouselSkeleton 
-					count={4} 
-					slideClassName="basis-[231px] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] lg:basis-[calc((100%-40px)/3)] xl:basis-[calc((100%-60px)/4)] h-[clamp(303px,calc(9.62vw+263.5px),404px)] laptop:h-[clamp(404px,calc(20vw+114px),500px)]" 
-					gapClassName="gap-4 lg:gap-5"/>)
+				(<CarouselSkeleton
+					count={4}
+					slideClassName="basis-[231px] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] lg:basis-[calc((100%-40px)/3)] xl:basis-[calc((100%-60px)/4)] h-[clamp(303px,calc(9.62vw+263.5px),404px)] laptop:h-[clamp(404px,calc(20vw+114px),500px)]"
+					gapClassName="gap-4 lg:gap-5" />)
 				:
 				(<Carousel emblaRef={emblaRef} className="gap-4 lg:gap-5">
 					{allData.map((item, index) => {

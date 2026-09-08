@@ -6,7 +6,7 @@ import { ROUTES } from "../routes/pathConstants";
 import { uniqueById } from "../utils/array";
 import { useTvShowsByGenre } from "../hooks/TVShows/useTvShowsByGenre";
 import { useTVGenres } from "../hooks/TVShows/useTVGenres";
-import { TvShowGridCardSkeleton } from "../components/tvshows/TvShowGridCardSkeleton";
+import { TvShowGridCardSkeleton } from "../components/skeleton/TvShowGridCardSkeleton";
 import { TvShowGridCard } from "../components/tvshows/TvShowGridCard";
 
 export function TvShowsByGenrePage() {
