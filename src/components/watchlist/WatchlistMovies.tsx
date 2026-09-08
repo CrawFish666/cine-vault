@@ -1,12 +1,15 @@
 import { useCarouselController } from "../../hooks/useCarouselController";
 import { ROUTES } from "../../routes/pathConstants";
 import { useWatchListStore } from "../../store/watchlistStore";
+import { getPosterUrl } from "../../utils/tmdbImage";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
 import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselProgress } from "../carousel/CarouselProgress";
 import { CarouselSlide } from "../carousel/CarouselSlide";
 import { StarRaiting } from "../StarRaiting";
+import { EmptyState } from "../ui/EmptyState";
+import { TmdbImage } from "../ui/TmdbImage";
 import { WatchlistButton } from "../WatchlistButton";
 
 export function WatchlistMovies() {
@@ -52,36 +55,51 @@ export function WatchlistMovies() {
 				selectedIndex={selectedIndex}
 				scrollPrev={scrollPrev}
 				scrollNext={scrollNext} />
-			<Carousel emblaRef={emblaRef} className="gap-4 lg:gap-5">
-				{data.map((item) => {
-					return (
-						<CarouselSlide key={item.id} className="relative basis-[231px] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] lg:basis-[calc((100%-40px)/3)] xl:basis-[calc((100%-60px)/4)]">
-							<CarouselCard to={ROUTES.MOVIE_DETAILS_BY_ID(item.id)} className="flex flex-col p-2.5 lg:p-4 2xl:p-5 h-[clamp(303px,calc(9.62vw+263.5px),404px)] laptop:h-[clamp(404px,calc(20vw+114px),500px)]">
+			{data.length === 0 ? (
+				<EmptyState
+					title="В списке пока нет фильмов"
+					description="Добавляйте фильмы в закладки, чтобы не потерять их"
+					action={{ label: "Найти фильмы", to: ROUTES.MOVIES }}
+				/>
+			) :
 
-								<div className="relative min-h-0 flex-1 overflow-hidden mb-3 lg:mb-4 2xl:mb-5">
+				(
+					<Carousel emblaRef={emblaRef} className="gap-4 lg:gap-5">
+						{data.map((item) => {
+							return (
+								<CarouselSlide key={item.id} className="relative basis-[231px] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] lg:basis-[calc((100%-40px)/3)] xl:basis-[calc((100%-60px)/4)]">
+									<CarouselCard to={ROUTES.MOVIE_DETAILS_BY_ID(item.id)} className="flex flex-col p-2.5 lg:p-4 2xl:p-5 h-[clamp(303px,calc(9.62vw+263.5px),404px)] laptop:h-[clamp(404px,calc(20vw+114px),500px)]">
 
-									<img className="object-cover rounded-[10px] w-full h-full" src={`https://image.tmdb.org/t/p/w500${item.posterPath}`} />
-								</div>
+										<div className="relative min-h-0 flex-1 overflow-hidden mb-3 lg:mb-4 2xl:mb-5">
+											<TmdbImage
+												className="rounded-[10px] w-full h-full"
+												alt={item.title}
+												loading="lazy"
+												decoding="async"
+												src={getPosterUrl(item.posterPath, "w500")}
+											/>
+										</div>
 
-								<div className="flex flex-col items-center self-center shrink-0 gap-1">
+										<div className="flex flex-col items-center self-center shrink-0 gap-1">
 
-									<div className="line-clamp-1 text-white font-medium text-base text-center">
-										{item.title}
-									</div>
+											<div className="line-clamp-1 text-white font-medium text-base text-center">
+												{item.title}
+											</div>
 
-									<div className="flex items-center gap-1 px-1.5 md:px-2 lg:px-2.5 py-1 lg:py-2 border border-surface-15 rounded-[51px] bg-surface-08">
-										<StarRaiting rating={item.voteAverage} starClassName="w-3.5 h-3.5 lg:w-4.5 lg:h-4.5" />
-									</div>
+											<div className="flex items-center gap-1 px-1.5 md:px-2 lg:px-2.5 py-1 lg:py-2 border border-surface-15 rounded-[51px] bg-surface-08">
+												<StarRaiting rating={item.voteAverage} starClassName="w-3.5 h-3.5 lg:w-4.5 lg:h-4.5" />
+											</div>
 
 
-								</div>
-							</CarouselCard>
-							<WatchlistButton className="absolute right-6 top-6"
-								item={{ id: item.id, mediaType: "movie", posterPath: item.posterPath, title: item.title, voteAverage: item.voteAverage }} />
-						</CarouselSlide>
-					)
-				})}
-			</Carousel>
+										</div>
+									</CarouselCard>
+									<WatchlistButton className="absolute right-6 top-6"
+										item={{ id: item.id, mediaType: "movie", posterPath: item.posterPath, title: item.title, voteAverage: item.voteAverage }} />
+								</CarouselSlide>
+							)
+						})}
+					</Carousel>
+				)}
 			{isMobile && <CarouselProgress emblaApi={emblaApi} />}
 		</section>
 	)
