@@ -49,13 +49,15 @@ export function Upcoming() {
 	return (
 		<section id={sectionLinks[ROUTES.MOVIES][2].id} className="">
 			<CarouselHeader title='Скоро в кино' >
-				{!isLoading && <CarouselControls scrollNext={scrollNext}
-					scrollPrev={scrollPrev}
-					nextButtonDisabled={nextButtonDisabled}
+				{!isLoading && <CarouselControls
+					emblaDotsRef={emblaDotsRef}
 					prevButtonDisabled={prevButtonDisabled}
-					variant="circle"
-					showPagination={false}
-					controlsVisibility="always" />}
+					nextButtonDisabled={nextButtonDisabled}
+					scrollSnaps={scrollSnaps}
+					selectedIndex={selectedIndex}
+					scrollPrev={scrollPrev}
+					scrollNext={scrollNext}
+					showPagination />}
 			</CarouselHeader>
 			{isLoading ?
 				(
