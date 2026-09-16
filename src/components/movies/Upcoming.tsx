@@ -1,6 +1,5 @@
 
 import { useUpcomingMovies } from '../../hooks/Movies/useUpcomingMovies';
-import { CarouselHeader } from '../carousel/CarouselHeader';
 import { CarouselProgress } from '../carousel/CarouselProgress';
 import { Carousel } from '../carousel/Carousel';
 import { CarouselCard } from '../carousel/CarouselCard';
@@ -12,6 +11,8 @@ import { TmdbImage } from '../ui/TmdbImage';
 import { getPosterUrl } from '../../utils/tmdbImage';
 import { CarouselSkeleton } from '../skeleton/CarouselSkeleton';
 import { sectionLinks } from '../Footer/sectionLinks';
+import { CarouselHeader } from '../carousel/CarouselHeader';
+import { CarouselControls } from '../carousel/CarouselControls';
 
 
 
@@ -47,18 +48,15 @@ export function Upcoming() {
 
 	return (
 		<section id={sectionLinks[ROUTES.MOVIES][2].id} className="">
-
-			<CarouselHeader
-				title='Скоро в кино'
-				showControls={!isLoading}
-				emblaDotsRef={emblaDotsRef}
-				prevButtonDisabled={prevButtonDisabled}
-				nextButtonDisabled={nextButtonDisabled}
-				scrollSnaps={scrollSnaps}
-				selectedIndex={selectedIndex}
-				scrollPrev={scrollPrev}
-				scrollNext={scrollNext} />
-
+			<CarouselHeader title='Скоро в кино' >
+				{!isLoading && <CarouselControls scrollNext={scrollNext}
+					scrollPrev={scrollPrev}
+					nextButtonDisabled={nextButtonDisabled}
+					prevButtonDisabled={prevButtonDisabled}
+					variant="circle"
+					showPagination={false}
+					controlsVisibility="always" />}
+			</CarouselHeader>
 			{isLoading ?
 				(
 					<CarouselSkeleton

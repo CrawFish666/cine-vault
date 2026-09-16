@@ -3,12 +3,13 @@ import { CarouselProgress } from "../carousel/CarouselProgress";
 import { useCarouselController } from "../../hooks/useCarouselController";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
-import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselSlide } from "../carousel/CarouselSlide";
 import { useInfiniteScrollTrigger } from "../../hooks/useInfiniteScrollTrigger";
 import { TmdbImage } from "../ui/TmdbImage";
 import { getProfileUrl } from "../../utils/tmdbImage";
 import { CarouselSkeleton } from "../skeleton/CarouselSkeleton";
+import { CarouselHeader } from "../carousel/CarouselHeader";
+import { CarouselControls } from "../carousel/CarouselControls";
 
 export function PopularPeople() {
 
@@ -51,16 +52,18 @@ export function PopularPeople() {
 
 	return (
 		<section className="">
-			<CarouselHeader
-				title="Популярные"
-				showControls={!isLoading}
-				emblaDotsRef={emblaDotsRef}
-				prevButtonDisabled={prevButtonDisabled}
-				nextButtonDisabled={nextButtonDisabled}
-				scrollSnaps={scrollSnaps}
-				selectedIndex={selectedIndex}
-				scrollPrev={scrollPrev}
-				scrollNext={scrollNext} />
+			<CarouselHeader title="Популярные">
+				{!isLoading && <CarouselControls
+					emblaDotsRef={emblaDotsRef}
+					prevButtonDisabled={prevButtonDisabled}
+					nextButtonDisabled={nextButtonDisabled}
+					scrollSnaps={scrollSnaps}
+					selectedIndex={selectedIndex}
+					scrollPrev={scrollPrev}
+					scrollNext={scrollNext}
+					showPagination
+				/>}
+			</CarouselHeader>
 			{isLoading ?
 				(<CarouselSkeleton
 					count={5}

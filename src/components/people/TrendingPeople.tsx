@@ -2,7 +2,6 @@ import { CarouselProgress } from "../carousel/CarouselProgress";
 import { useCarouselController } from "../../hooks/useCarouselController";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
-import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselSlide } from "../carousel/CarouselSlide";
 import { useInfiniteScrollTrigger } from "../../hooks/useInfiniteScrollTrigger";
 import { useTrendingPeople } from "../../hooks/People/useTrendingPeople";
@@ -11,6 +10,8 @@ import { getProfileUrl } from "../../utils/tmdbImage";
 import { sectionLinks } from "../Footer/sectionLinks";
 import { ROUTES } from "../../routes/pathConstants";
 import { CarouselSkeleton } from "../skeleton/CarouselSkeleton";
+import { CarouselHeader } from "../carousel/CarouselHeader";
+import { CarouselControls } from "../carousel/CarouselControls";
 
 export function TrendingPeople() {
 
@@ -54,16 +55,18 @@ export function TrendingPeople() {
 
 	return (
 		<section className="" id={sectionLinks[ROUTES.PEOPLE][1].id}>
-			<CarouselHeader
-				title="В тренде"
-				showControls={!isLoading}
-				emblaDotsRef={emblaDotsRef}
-				prevButtonDisabled={prevButtonDisabled}
-				nextButtonDisabled={nextButtonDisabled}
-				scrollSnaps={scrollSnaps}
-				selectedIndex={selectedIndex}
-				scrollPrev={scrollPrev}
-				scrollNext={scrollNext} />
+			<CarouselHeader title="В тренде">
+				{!isLoading && <CarouselControls
+					emblaDotsRef={emblaDotsRef}
+					prevButtonDisabled={prevButtonDisabled}
+					nextButtonDisabled={nextButtonDisabled}
+					scrollSnaps={scrollSnaps}
+					selectedIndex={selectedIndex}
+					scrollPrev={scrollPrev}
+					scrollNext={scrollNext}
+					showPagination
+				/>}
+			</CarouselHeader>
 			{isLoading ?
 				(<CarouselSkeleton
 					count={5}

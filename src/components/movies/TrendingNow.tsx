@@ -3,7 +3,6 @@ import { useCarouselController } from "../../hooks/useCarouselController";
 import { useTrendingNowMovies } from "../../hooks/Movies/useTrendingNowMovies";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
-import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselProgress } from "../carousel/CarouselProgress";
 import { CarouselSlide } from "../carousel/CarouselSlide";
 import { formatRuntime, formatVoteCount } from "../../utils/format";
@@ -19,6 +18,8 @@ import { TmdbImage } from "../ui/TmdbImage";
 import { getPosterUrl } from "../../utils/tmdbImage";
 import { CarouselSkeleton } from "../skeleton/CarouselSkeleton";
 import { sectionLinks } from "../Footer/sectionLinks";
+import { CarouselHeader } from "../carousel/CarouselHeader";
+import { CarouselControls } from "../carousel/CarouselControls";
 
 export function TrendingNow() {
 
@@ -69,16 +70,18 @@ export function TrendingNow() {
 
 	return (
 		<section id={sectionLinks[ROUTES.MOVIES][4].id}>
-			<CarouselHeader title="В тренде"
-				showControls={!isLoading}
-				emblaDotsRef={emblaDotsRef}
-				prevButtonDisabled={prevButtonDisabled}
-				nextButtonDisabled={nextButtonDisabled}
-				scrollSnaps={scrollSnaps}
-				selectedIndex={selectedIndex}
-				scrollPrev={scrollPrev}
-				scrollNext={scrollNext}
-			/>
+			<CarouselHeader title="В тренде">
+				{!isLoading && <CarouselControls
+					emblaDotsRef={emblaDotsRef}
+					prevButtonDisabled={prevButtonDisabled}
+					nextButtonDisabled={nextButtonDisabled}
+					scrollSnaps={scrollSnaps}
+					selectedIndex={selectedIndex}
+					scrollPrev={scrollPrev}
+					scrollNext={scrollNext}
+					showPagination
+				/>}
+			</CarouselHeader>
 			<div className="flex gap-3 mb-10">
 				<button
 					onClick={() => {

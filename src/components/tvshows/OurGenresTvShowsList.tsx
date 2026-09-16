@@ -5,13 +5,14 @@ import { useCarouselController } from "../../hooks/useCarouselController";
 import { useVisibleSlides } from "../../hooks/useVisibleSlides";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
-import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselSlide } from "../carousel/CarouselSlide";
 import { TmdbImage } from "../ui/TmdbImage";
 import { getPosterUrl } from "../../utils/tmdbImage";
 import { CarouselSkeleton } from "../skeleton/CarouselSkeleton";
 import { sectionLinks } from "../Footer/sectionLinks";
 import { ROUTES } from "../../routes/pathConstants";
+import { CarouselHeader } from "../carousel/CarouselHeader";
+import { CarouselControls } from "../carousel/CarouselControls";
 
 export function OurGenresTvShowsList() {
 	const { data, isLoading } = useTVGenres();
@@ -45,17 +46,18 @@ export function OurGenresTvShowsList() {
 
 	return (
 		<section id={sectionLinks[ROUTES.TV_SHOWS][0].id}>
-			<CarouselHeader title="По жанрам"
-				showControls={!isLoading}
-				emblaDotsRef={emblaDotsRef}
-				prevButtonDisabled={prevButtonDisabled}
-				nextButtonDisabled={nextButtonDisabled}
-				scrollSnaps={scrollSnaps}
-				selectedIndex={selectedIndex}
-				scrollPrev={scrollPrev}
-				scrollNext={scrollNext}
-			/>
-
+			<CarouselHeader title="По жанрам">
+				{!isLoading && <CarouselControls
+					emblaDotsRef={emblaDotsRef}
+					prevButtonDisabled={prevButtonDisabled}
+					nextButtonDisabled={nextButtonDisabled}
+					scrollSnaps={scrollSnaps}
+					selectedIndex={selectedIndex}
+					scrollPrev={scrollPrev}
+					scrollNext={scrollNext}
+					showPagination
+				/>}
+			</CarouselHeader>
 			{isLoading ? (
 				<CarouselSkeleton
 					count={5}

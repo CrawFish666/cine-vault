@@ -4,6 +4,7 @@ import { useWatchListStore } from "../../store/watchlistStore";
 import { getPosterUrl } from "../../utils/tmdbImage";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
+import { CarouselControls } from "../carousel/CarouselControls";
 import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselProgress } from "../carousel/CarouselProgress";
 import { CarouselSlide } from "../carousel/CarouselSlide";
@@ -45,16 +46,18 @@ export function WatchlistMovies() {
 
 	return (
 		<section className="">
-			<CarouselHeader
-				title="Фильмы"
-				showControls={true}
-				emblaDotsRef={emblaDotsRef}
-				prevButtonDisabled={prevButtonDisabled}
-				nextButtonDisabled={nextButtonDisabled}
-				scrollSnaps={scrollSnaps}
-				selectedIndex={selectedIndex}
-				scrollPrev={scrollPrev}
-				scrollNext={scrollNext} />
+			<CarouselHeader title="Фильмы">
+				<CarouselControls
+					emblaDotsRef={emblaDotsRef}
+					prevButtonDisabled={prevButtonDisabled}
+					nextButtonDisabled={nextButtonDisabled}
+					scrollSnaps={scrollSnaps}
+					selectedIndex={selectedIndex}
+					scrollPrev={scrollPrev}
+					scrollNext={scrollNext}
+					showPagination
+				/>
+			</CarouselHeader>
 			{data.length === 0 ? (
 				<EmptyState
 					title="В списке пока нет фильмов"

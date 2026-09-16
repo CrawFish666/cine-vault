@@ -4,7 +4,6 @@ import { useMustWatchMovies } from "../../hooks/Movies/useMustWatchMovies";
 import { formatRuntime, formatVoteCount } from "../../utils/format";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
-import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselProgress } from "../carousel/CarouselProgress";
 import { CarouselSlide } from "../carousel/CarouselSlide";
 import { StarRaiting } from "../StarRaiting";
@@ -17,6 +16,8 @@ import { TmdbImage } from "../ui/TmdbImage";
 import { getPosterUrl } from "../../utils/tmdbImage";
 import { CarouselSkeleton } from "../skeleton/CarouselSkeleton";
 import { sectionLinks } from "../Footer/sectionLinks";
+import { CarouselHeader } from "../carousel/CarouselHeader";
+import { CarouselControls } from "../carousel/CarouselControls";
 
 
 
@@ -68,15 +69,18 @@ export function MustWatchMovies() {
 	return (
 		<section id={sectionLinks[ROUTES.MOVIES][3].id} className="">
 			<CarouselHeader
-				title="Стоит посмотреть"
-				showControls={!isLoading}
-				emblaDotsRef={emblaDotsRef}
-				prevButtonDisabled={prevButtonDisabled}
-				nextButtonDisabled={nextButtonDisabled}
-				scrollSnaps={scrollSnaps}
-				selectedIndex={selectedIndex}
-				scrollPrev={scrollPrev}
-				scrollNext={scrollNext} />
+				title="Стоит посмотреть">
+				{!isLoading && <CarouselControls
+					emblaDotsRef={emblaDotsRef}
+					prevButtonDisabled={prevButtonDisabled}
+					nextButtonDisabled={nextButtonDisabled}
+					scrollSnaps={scrollSnaps}
+					selectedIndex={selectedIndex}
+					scrollPrev={scrollPrev}
+					scrollNext={scrollNext}
+					showPagination
+				/>}
+			</CarouselHeader>
 			{isLoading ? (
 				<CarouselSkeleton
 					count={4}
@@ -88,7 +92,7 @@ export function MustWatchMovies() {
 						const runtime = runtimes[index]?.data;
 
 						return (
-							<CarouselSlide key={item.id} className="basis-[231px] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] lg:basis-[calc((100%-40px)/3)] xl:basis-[calc((100%-60px)/4)]">
+							<CarouselSlide key={item.id} className="relative basis-[231px] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] lg:basis-[calc((100%-40px)/3)] xl:basis-[calc((100%-60px)/4)]">
 								<CarouselCard to={ROUTES.MOVIE_DETAILS_BY_ID(item.id)} className="relative flex flex-col p-2.5 lg:p-4 2xl:p-5 h-[clamp(303px,calc(9.62vw+263.5px),404px)] laptop:h-[clamp(404px,calc(20vw+114px),500px)]">
 
 									<div className="relative min-h-0 flex-1 overflow-hidden mb-3 lg:mb-4 2xl:mb-5">
@@ -115,7 +119,7 @@ export function MustWatchMovies() {
 
 									</div>
 								</CarouselCard>
-								<WatchlistButton className="absolute right-3 top-3"
+								<WatchlistButton className="absolute right-6 top-6"
 									item={{ id: item.id, mediaType: "movie", posterPath: item.poster_path, title: item.title, voteAverage: item.vote_average }} />
 							</CarouselSlide>
 						)

@@ -4,7 +4,7 @@ import { getProfileUrl } from "../../utils/tmdbImage";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
 import { CarouselControls } from "../carousel/CarouselControls";
-import { CarouselHeader2 } from "../carousel/CarouselHeader2";
+import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselSlide } from "../carousel/CarouselSlide";
 import { TmdbImage } from "../ui/TmdbImage";
 
@@ -38,7 +38,7 @@ export function CastSection({ cast }: CastSectionProps) {
 
 	return (
 		<section className="cast p-[24px] min-[390px]:p-[clamp(24px,calc(1.5238vw_+_18.057px),40px)] laptop:p-[clamp(40px,calc(2.0833vw_+_10px),50px)] border border-surface-15 rounded-xl bg-surface-10">
-			<CarouselHeader2 title="Актёры" variant="subsection">
+			<CarouselHeader title="Актёры" variant="subsection">
 				<CarouselControls
 
 					scrollNext={scrollNext}
@@ -50,7 +50,7 @@ export function CastSection({ cast }: CastSectionProps) {
 					controlsVisibility="always"
 
 				/>
-			</CarouselHeader2>
+			</CarouselHeader>
 			<Carousel emblaRef={emblaRef} className="gap-5">
 				{cast.map((person) => {
 					const character = "character" in person ? person.character : person.roles[0]?.character;

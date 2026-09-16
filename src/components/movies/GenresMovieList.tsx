@@ -3,7 +3,6 @@ import { useCarouselController } from "../../hooks/useCarouselController";
 import { useGenresMovieList } from "../../hooks/Movies/useGenresMovieList"
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
-import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselSlide } from "../carousel/CarouselSlide";
 import { useVisibleSlides } from "../../hooks/useVisibleSlides";
 import { useGenrePreviews } from "../../hooks/Movies/useGenrePreviews";
@@ -12,6 +11,8 @@ import { getPosterUrl } from "../../utils/tmdbImage";
 import { CarouselSkeleton } from "../skeleton/CarouselSkeleton";
 import { sectionLinks } from "../Footer/sectionLinks";
 import { ROUTES } from "../../routes/pathConstants";
+import { CarouselHeader } from "../carousel/CarouselHeader";
+import { CarouselControls } from "../carousel/CarouselControls";
 
 
 
@@ -48,22 +49,24 @@ export function GenresMovieList() {
 
 	return (
 		<section id={sectionLinks[ROUTES.MOVIES][1].id}>
-			<CarouselHeader title="По жанрам" 
-			showControls={!isLoading}
-				emblaDotsRef={emblaDotsRef}
-				prevButtonDisabled={prevButtonDisabled}
-				nextButtonDisabled={nextButtonDisabled}
-				scrollSnaps={scrollSnaps}
-				selectedIndex={selectedIndex}
-				scrollPrev={scrollPrev}
-				scrollNext={scrollNext}
-
-			/>
+			<CarouselHeader title="По жанрам">
+				{!isLoading && <CarouselControls
+					emblaDotsRef={emblaDotsRef}
+					prevButtonDisabled={prevButtonDisabled}
+					nextButtonDisabled={nextButtonDisabled}
+					scrollSnaps={scrollSnaps}
+					selectedIndex={selectedIndex}
+					scrollPrev={scrollPrev}
+					scrollNext={scrollNext}
+					showPagination
+				/>}
+			</CarouselHeader>
+			
 			{isLoading ?
 				(
-					<CarouselSkeleton gapClassName="gap-4 lg:gap-5" slideClassName="basis-[180px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] lg:basis-[calc((100%-80px)/5)] h-[clamp(201px,calc(5.743vw+178.6px),259px)] laptop:h-[clamp(259px,calc(17.292vw+10px),342px)]"/>
-			)
-				: 
+					<CarouselSkeleton gapClassName="gap-4 lg:gap-5" slideClassName="basis-[180px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] lg:basis-[calc((100%-80px)/5)] h-[clamp(201px,calc(5.743vw+178.6px),259px)] laptop:h-[clamp(259px,calc(17.292vw+10px),342px)]" />
+				)
+				:
 				(
 					<Carousel emblaRef={emblaRef} className="gap-4 lg:gap-5">
 						{data?.map((item, index) => {
@@ -71,9 +74,9 @@ export function GenresMovieList() {
 
 							return (
 								<CarouselSlide key={item.id} className="basis-[180px] sm:basis-[calc((100%-40px)/3)] md:basis-[calc((100%-60px)/4)] lg:basis-[calc((100%-80px)/5)]">
-									<CarouselCard 
+									<CarouselCard
 										to={ROUTES.MOVIES_BY_GENRE_BY_ID(item.id)}
-									className="text-white p-5 flex flex-col gap-2 h-[clamp(201px,calc(5.743vw+178.6px),259px)] laptop:h-[clamp(259px,calc(17.292vw+10px),342px)]">
+										className="text-white p-5 flex flex-col gap-2 h-[clamp(201px,calc(5.743vw+178.6px),259px)] laptop:h-[clamp(259px,calc(17.292vw+10px),342px)]">
 										<div className="grid grid-cols-2 grid-rows-2 gap-1 flex-1 min-h-0">
 											{posterPaths?.filter(item => item.poster_path).map((item) => (
 												// <img className="w-full h-full object-cover rounded-sm" key={i} src={`https://image.tmdb.org/t/p/original${path}`} />
@@ -95,7 +98,7 @@ export function GenresMovieList() {
 						})}
 					</Carousel>
 				)}
-			
+
 		</section>
 	)
 }

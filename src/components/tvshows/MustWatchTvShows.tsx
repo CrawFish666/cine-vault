@@ -2,7 +2,6 @@ import { useCarouselController } from "../../hooks/useCarouselController";
 import { formatVoteCount } from "../../utils/format";
 import { Carousel } from "../carousel/Carousel";
 import { CarouselCard } from "../carousel/CarouselCard";
-import { CarouselHeader } from "../carousel/CarouselHeader";
 import { CarouselProgress } from "../carousel/CarouselProgress";
 import { CarouselSlide } from "../carousel/CarouselSlide";
 import { StarRaiting } from "../StarRaiting";
@@ -16,6 +15,8 @@ import { TmdbImage } from "../ui/TmdbImage";
 import { getPosterUrl } from "../../utils/tmdbImage";
 import { sectionLinks } from "../Footer/sectionLinks";
 import { CarouselSkeleton } from "../skeleton/CarouselSkeleton";
+import { CarouselHeader } from "../carousel/CarouselHeader";
+import { CarouselControls } from "../carousel/CarouselControls";
 
 
 
@@ -66,16 +67,18 @@ export function MustWatchTvShows() {
 
 	return (
 		<section className="" id={sectionLinks[ROUTES.TV_SHOWS][4].id}>
-			<CarouselHeader
-				title="Стоит посмотреть"
-				showControls={!isLoading}
-				emblaDotsRef={emblaDotsRef}
-				prevButtonDisabled={prevButtonDisabled}
-				nextButtonDisabled={nextButtonDisabled}
-				scrollSnaps={scrollSnaps}
-				selectedIndex={selectedIndex}
-				scrollPrev={scrollPrev}
-				scrollNext={scrollNext} />
+			<CarouselHeader title="Стоит посмотреть">
+				{!isLoading && <CarouselControls
+					emblaDotsRef={emblaDotsRef}
+					prevButtonDisabled={prevButtonDisabled}
+					nextButtonDisabled={nextButtonDisabled}
+					scrollSnaps={scrollSnaps}
+					selectedIndex={selectedIndex}
+					scrollPrev={scrollPrev}
+					scrollNext={scrollNext}
+					showPagination
+				/>}
+			</CarouselHeader>
 			{isLoading ?
 				(<CarouselSkeleton
 					count={4}

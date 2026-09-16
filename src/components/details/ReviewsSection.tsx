@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import { CarouselHeader2 } from "../carousel/CarouselHeader2";
+import { CarouselHeader } from "../carousel/CarouselHeader";
 import type { MediaReviewsParams } from "../../api/media";
 import { useMediaReviews } from "../../hooks/useMediaReviews";
 import { useCarouselController } from "../../hooks/useCarouselController";
@@ -58,14 +58,14 @@ export function ReviewsSection({ id, mediaType }: ReviewsSectionProps) {
 
 	return (
 		<section className="reviews p-[24px] min-[390px]:p-[clamp(24px,calc(1.5238vw_+_18.057px),40px)] laptop:p-[clamp(40px,calc(2.0833vw_+_10px),50px)] border border-surface-15 bg-surface-10 rounded-xl flex flex-col space-y-10">
-			<CarouselHeader2 title="Отзывы" variant="subsection" className="flex-wrap">
+			<CarouselHeader title="Отзывы" variant="subsection" className="flex-wrap">
 				<a href={`https://www.themoviedb.org/${mediaType === "movie" ? "movie" : "tv"}/${id}/reviews`} target="_blank" rel="noopener noreferrer" className="text-white flex items-center gap-1 px-4 py-3.5 border border-surface-15 bg-surface-08 rounded-lg cursor-pointer">
 					<Plus className="w-7.5 h-7.5 text-white fill-white" />
 					<span className="font-medium text-sm 2xl:text-lg text-white">
 						Оставить отзыв
 					</span>
 				</a>
-			</CarouselHeader2>
+			</CarouselHeader>
 			{isLoading ? <div className="flex flex-col h-full p-[24px] min-[390px]:p-[clamp(24px,calc(0.5714vw_+_21.771px),30px)] laptop:p-[clamp(30px,calc(2.0833vw),40px)] gap-5 h-[clamp(200px,calc(4.667vw+240.8px),240px)] laptop:h-[clamp(240px,calc(14.375vw+101px),270px)] !bg-surface-08 animate-pulse"></div>
 				: allReviews.length > 0 ? (
 					<>
