@@ -9,7 +9,7 @@
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-🔗 **[Демо](https://cine-vault-alpha-two.vercel.app/)**
+🔗 **[Демо](https://cinevault-emelyan.vercel.app/)**
 
 ## ✨ Возможности
 
